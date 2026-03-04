@@ -45,3 +45,20 @@ export interface LibraryRunSummary {
     unexpectedErrors: number,
     skippedSeriesIds: string[],
 }
+
+export interface LibraryRunCheckpoint {
+    pageNumber: number,
+    startIndexInPage: number,
+    dryRun: boolean,
+    updatedAtEpochMs: number,
+}
+
+export interface LibraryRunControlStatus {
+    active: boolean,
+    paused: boolean,
+    stopRequested: boolean,
+    hasCheckpoint: boolean,
+    checkpoint?: LibraryRunCheckpoint | null,
+}
+
+export type LibraryRunResumeMode = 'CONTINUE' | 'NEW'

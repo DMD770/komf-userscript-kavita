@@ -11306,74 +11306,74 @@ body.body--dark {
 [data-v-e95f9e5e] .col {
     flex: 10000 1 0;
 }
-}.row[data-v-dde288b2] {
+}.row[data-v-f34f6abd] {
   margin: 0;
 }
-.col[data-v-dde288b2], .col-auto[data-v-dde288b2] {
+.col[data-v-f34f6abd], .col-auto[data-v-f34f6abd] {
   padding: 0;
 }
-.row + .row[data-v-dde288b2] {
+.row + .row[data-v-f34f6abd] {
   margin: 0;
 }
-[data-v-dde288b2] .q-checkbox>* {
+[data-v-f34f6abd] .q-checkbox>* {
   width: auto;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-dde288b2] .q-tab__content>* {
+[data-v-f34f6abd] .q-tab__content>* {
   flex-shrink: unset;
 }
-[data-v-dde288b2] .q-tabs>* {
+[data-v-f34f6abd] .q-tabs>* {
   width: auto;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-dde288b2] .q-space {
+[data-v-f34f6abd] .q-space {
   width: auto;
 }
-[data-v-dde288b2] .q-splitter {
+[data-v-f34f6abd] .q-splitter {
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-dde288b2] .q-splitter>* {
+[data-v-f34f6abd] .q-splitter>* {
   width: 1px;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-dde288b2] .row {
+[data-v-f34f6abd] .row {
   margin: 0;
   --bs-gutter-x: unset;
   --bs-gutter-y: unset;
 }
-[data-v-dde288b2] .col {
+[data-v-f34f6abd] .col {
   padding: 0;
 }
-[data-v-dde288b2] .row + .row {
+[data-v-f34f6abd] .row + .row {
   margin: 0;
 }
-.bg-dark[data-v-dde288b2] {
+.bg-dark[data-v-f34f6abd] {
   background: unset;
 }
-[data-v-dde288b2] input:not([type=range]) {
+[data-v-f34f6abd] input:not([type=range]) {
   background-color: unset;
   border-color: unset;
 }
-[data-v-dde288b2] input:not([type=range]):focus {
+[data-v-f34f6abd] input:not([type=range]):focus {
   border-color: unset;
   background-color: unset;
   box-shadow: unset;
 }
-[data-v-dde288b2] .hidden {
+[data-v-f34f6abd] .hidden {
   display: none !important;
 }
-[data-v-dde288b2] .q-field__append {
+[data-v-f34f6abd] .q-field__append {
   width: auto;
 }
-[data-v-dde288b2] .q-chip {
+[data-v-f34f6abd] .q-chip {
   width: auto;
 }
 @media (min-width: 0) {
-[data-v-dde288b2] .col {
+[data-v-f34f6abd] .col {
     flex: 10000 1 0;
 }
 }.row[data-v-d80e76e9] {
@@ -21474,6 +21474,60 @@ class KomfMetadataService {
         return null;
       }
       let msg = "Failed to get latest library summary";
+      if (axios$1.isAxiosError(e)) {
+        msg += `: ${e.message}`;
+      }
+      throw new Error(msg);
+    }
+  }
+  async libraryRunControlStatus(libraryId) {
+    try {
+      return (await this.http.get(
+        `${this.settings.komfUrl}/${this.settings.mediaServer}/control/library/${libraryId}/status`
+      )).data;
+    } catch (e) {
+      let msg = "Failed to get library run status";
+      if (axios$1.isAxiosError(e)) {
+        msg += `: ${e.message}`;
+      }
+      throw new Error(msg);
+    }
+  }
+  async pauseLibraryRun(libraryId) {
+    try {
+      await this.http.post(
+        `${this.settings.komfUrl}/${this.settings.mediaServer}/control/library/${libraryId}/pause`
+      );
+    } catch (e) {
+      let msg = "Failed to pause library run";
+      if (axios$1.isAxiosError(e)) {
+        msg += `: ${e.message}`;
+      }
+      throw new Error(msg);
+    }
+  }
+  async resumeLibraryRun(libraryId, mode = "CONTINUE") {
+    try {
+      await this.http.post(
+        `${this.settings.komfUrl}/${this.settings.mediaServer}/control/library/${libraryId}/resume`,
+        void 0,
+        { params: { mode } }
+      );
+    } catch (e) {
+      let msg = "Failed to resume library run";
+      if (axios$1.isAxiosError(e)) {
+        msg += `: ${e.message}`;
+      }
+      throw new Error(msg);
+    }
+  }
+  async stopLibraryRun(libraryId) {
+    try {
+      await this.http.post(
+        `${this.settings.komfUrl}/${this.settings.mediaServer}/control/library/${libraryId}/stop`
+      );
+    } catch (e) {
+      let msg = "Failed to stop library run";
       if (axios$1.isAxiosError(e)) {
         msg += `: ${e.message}`;
       }
@@ -39472,6 +39526,99 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
         errorNotification(e, $q);
       }
     }
+    async function viewRunControlStatus() {
+      try {
+        const status = await metadataService.libraryRunControlStatus(libraryId());
+        const checkpoint = status.checkpoint ? `<p><b>Checkpoint:</b> page ${status.checkpoint.pageNumber}, index ${status.checkpoint.startIndexInPage}, dryRun=${status.checkpoint.dryRun}</p>` : "<p><b>Checkpoint:</b> none</p>";
+        $q.dialog({
+          title: "Run Control Status",
+          message: `
+              <p><b>Active:</b> ${status.active}</p>
+              <p><b>Paused:</b> ${status.paused}</p>
+              <p><b>Stop requested:</b> ${status.stopRequested}</p>
+              <p><b>Has checkpoint:</b> ${status.hasCheckpoint}</p>
+              ${checkpoint}
+            `,
+          html: true
+        });
+      } catch (e) {
+        errorNotification(e, $q);
+      }
+    }
+    async function pauseRun() {
+      try {
+        await metadataService.pauseLibraryRun(libraryId());
+        $q.notify({
+          message: "Pause requested for current library run",
+          color: "secondary",
+          closeBtn: true,
+          timeout: 5e3
+        });
+      } catch (e) {
+        errorNotification(e, $q);
+      }
+    }
+    async function resumeRunContinue() {
+      try {
+        await metadataService.resumeLibraryRun(libraryId(), "CONTINUE");
+        $q.notify({
+          message: "Resume requested (continue from checkpoint)",
+          color: "secondary",
+          closeBtn: true,
+          timeout: 5e3
+        });
+      } catch (e) {
+        errorNotification(e, $q);
+      }
+    }
+    async function resumeRunNew() {
+      $q.dialog({
+        component: ConfirmationDialog,
+        componentProps: {
+          title: "Resume Run (New)",
+          bodyHtml: "Start a new library run from the beginning? Existing checkpoint will be discarded.",
+          confirmText: "Yes, start new run",
+          buttonConfirm: "Start New",
+          buttonConfirmColor: "warning"
+        }
+      }).onOk(async () => {
+        try {
+          await metadataService.resumeLibraryRun(libraryId(), "NEW");
+          $q.notify({
+            message: "Resume requested (new run from start)",
+            color: "secondary",
+            closeBtn: true,
+            timeout: 5e3
+          });
+        } catch (e) {
+          errorNotification(e, $q);
+        }
+      });
+    }
+    async function stopRun() {
+      $q.dialog({
+        component: ConfirmationDialog,
+        componentProps: {
+          title: "Stop Run",
+          bodyHtml: "Stop current library run now? Progress checkpoint will be saved for continue-resume.",
+          confirmText: "Yes, stop run",
+          buttonConfirm: "Stop",
+          buttonConfirmColor: "negative"
+        }
+      }).onOk(async () => {
+        try {
+          await metadataService.stopLibraryRun(libraryId());
+          $q.notify({
+            message: "Stop requested. Run will halt and save checkpoint.",
+            color: "warning",
+            closeBtn: true,
+            timeout: 6e3
+          });
+        } catch (e) {
+          errorNotification(e, $q);
+        }
+      });
+    }
     function promptResetLibrary() {
       $q.dialog({
         component: ConfirmationDialog,
@@ -39574,6 +39721,101 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
           ]),
           withDirectives((openBlock(), createBlock(QItem, {
             clickable: "",
+            onClick: viewRunControlStatus
+          }, {
+            default: withCtx(() => [
+              createVNode(QItemSection, {
+                class: "text-body2 text-weight-medium",
+                "no-wrap": ""
+              }, {
+                default: withCtx(() => [
+                  createTextVNode("Run Control Status")
+                ]),
+                _: 1
+              })
+            ]),
+            _: 1
+          })), [
+            [ClosePopup]
+          ]),
+          withDirectives((openBlock(), createBlock(QItem, {
+            clickable: "",
+            onClick: pauseRun
+          }, {
+            default: withCtx(() => [
+              createVNode(QItemSection, {
+                class: "text-body2 text-weight-medium",
+                "no-wrap": ""
+              }, {
+                default: withCtx(() => [
+                  createTextVNode("Pause Run")
+                ]),
+                _: 1
+              })
+            ]),
+            _: 1
+          })), [
+            [ClosePopup]
+          ]),
+          withDirectives((openBlock(), createBlock(QItem, {
+            clickable: "",
+            onClick: resumeRunContinue
+          }, {
+            default: withCtx(() => [
+              createVNode(QItemSection, {
+                class: "text-body2 text-weight-medium",
+                "no-wrap": ""
+              }, {
+                default: withCtx(() => [
+                  createTextVNode("Resume Run (Continue)")
+                ]),
+                _: 1
+              })
+            ]),
+            _: 1
+          })), [
+            [ClosePopup]
+          ]),
+          withDirectives((openBlock(), createBlock(QItem, {
+            clickable: "",
+            onClick: resumeRunNew
+          }, {
+            default: withCtx(() => [
+              createVNode(QItemSection, {
+                class: "text-body2 text-weight-medium",
+                "no-wrap": ""
+              }, {
+                default: withCtx(() => [
+                  createTextVNode("Resume Run (New)")
+                ]),
+                _: 1
+              })
+            ]),
+            _: 1
+          })), [
+            [ClosePopup]
+          ]),
+          withDirectives((openBlock(), createBlock(QItem, {
+            clickable: "",
+            onClick: stopRun
+          }, {
+            default: withCtx(() => [
+              createVNode(QItemSection, {
+                class: "text-body2 text-weight-medium",
+                "no-wrap": ""
+              }, {
+                default: withCtx(() => [
+                  createTextVNode("Stop Run")
+                ]),
+                _: 1
+              })
+            ]),
+            _: 1
+          })), [
+            [ClosePopup]
+          ]),
+          withDirectives((openBlock(), createBlock(QItem, {
+            clickable: "",
             onClick: promptResetLibrary
           }, {
             default: withCtx(() => [
@@ -39597,8 +39839,8 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const LibraryActionsMenu_vue_vue_type_style_index_0_scoped_dde288b2_lang = "";
-const LibraryActionsMenu = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-dde288b2"]]);
+const LibraryActionsMenu_vue_vue_type_style_index_0_scoped_f34f6abd_lang = "";
+const LibraryActionsMenu = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-f34f6abd"]]);
 const _sfc_main$5 = /* @__PURE__ */ defineComponent({
   __name: "KomgaLibraryActions",
   setup(__props) {

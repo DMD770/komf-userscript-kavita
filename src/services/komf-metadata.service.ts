@@ -1,6 +1,8 @@
 import axios, { type AxiosInstance } from 'axios'
 import type {
     IdentifyRequest,
+    LibraryRunControlStatus,
+    LibraryRunResumeMode,
     LibraryRunSummary,
     RetrySkippedSeriesResponse,
     SearchResult,
@@ -152,6 +154,66 @@ export default class KomfMetadataService {
                 return null
             }
             let msg = 'Failed to get latest library summary'
+            if (axios.isAxiosError(e)) {
+                msg += `: ${e.message}`
+            }
+            throw new Error(msg)
+        }
+    }
+
+    async libraryRunControlStatus(libraryId: string): Promise<LibraryRunControlStatus> {
+        try {
+            return (
+                await this.http.get(
+                    `${this.settings.komfUrl}/${this.settings.mediaServer}/control/library/${libraryId}/status`
+                )
+            ).data
+        } catch (e) {
+            let msg = 'Failed to get library run status'
+            if (axios.isAxiosError(e)) {
+                msg += `: ${e.message}`
+            }
+            throw new Error(msg)
+        }
+    }
+
+    async pauseLibraryRun(libraryId: string) {
+        try {
+            await this.http.post(
+                `${this.settings.komfUrl}/${this.settings.mediaServer}/control/library/${libraryId}/pause`
+            )
+        } catch (e) {
+            let msg = 'Failed to pause library run'
+            if (axios.isAxiosError(e)) {
+                msg += `: ${e.message}`
+            }
+            throw new Error(msg)
+        }
+    }
+
+    async resumeLibraryRun(libraryId: string, mode: LibraryRunResumeMode = 'CONTINUE') {
+        try {
+            await this.http.post(
+                `${this.settings.komfUrl}/${this.settings.mediaServer}/control/library/${libraryId}/resume`,
+                undefined,
+                { params: { mode } }
+            )
+        } catch (e) {
+            let msg = 'Failed to resume library run'
+            if (axios.isAxiosError(e)) {
+                msg += `: ${e.message}`
+            }
+            throw new Error(msg)
+        }
+    }
+
+    async stopLibraryRun(libraryId: string) {
+        try {
+            await this.http.post(
+                `${this.settings.komfUrl}/${this.settings.mediaServer}/control/library/${libraryId}/stop`
+            )
+        } catch (e) {
+            let msg = 'Failed to stop library run'
             if (axios.isAxiosError(e)) {
                 msg += `: ${e.message}`
             }

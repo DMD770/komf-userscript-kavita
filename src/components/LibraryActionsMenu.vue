@@ -12,6 +12,21 @@
     <q-item clickable v-close-popup @click="viewLatestSummary">
       <q-item-section class="text-body2 text-weight-medium" no-wrap>View Latest Summary</q-item-section>
     </q-item>
+    <q-item clickable v-close-popup @click="viewRunControlStatus">
+      <q-item-section class="text-body2 text-weight-medium" no-wrap>Run Control Status</q-item-section>
+    </q-item>
+    <q-item clickable v-close-popup @click="pauseRun">
+      <q-item-section class="text-body2 text-weight-medium" no-wrap>Pause Run</q-item-section>
+    </q-item>
+    <q-item clickable v-close-popup @click="resumeRunContinue">
+      <q-item-section class="text-body2 text-weight-medium" no-wrap>Resume Run (Continue)</q-item-section>
+    </q-item>
+    <q-item clickable v-close-popup @click="resumeRunNew">
+      <q-item-section class="text-body2 text-weight-medium" no-wrap>Resume Run (New)</q-item-section>
+    </q-item>
+    <q-item clickable v-close-popup @click="stopRun">
+      <q-item-section class="text-body2 text-weight-medium" no-wrap>Stop Run</q-item-section>
+    </q-item>
     <q-item clickable v-close-popup @click="promptResetLibrary">
       <q-item-section class="text-body2 text-weight-medium" no-wrap>Reset Metadata</q-item-section>
     </q-item>
@@ -173,6 +188,106 @@ async function viewLatestSummary() {
     } catch (e) {
         errorNotification(e, $q)
     }
+}
+
+async function viewRunControlStatus() {
+    try {
+        const status = await metadataService.libraryRunControlStatus(libraryId())
+        const checkpoint = status.checkpoint
+            ? `<p><b>Checkpoint:</b> page ${status.checkpoint.pageNumber}, index ${status.checkpoint.startIndexInPage}, dryRun=${status.checkpoint.dryRun}</p>`
+            : '<p><b>Checkpoint:</b> none</p>'
+        $q.dialog({
+            title: 'Run Control Status',
+            message: `
+              <p><b>Active:</b> ${status.active}</p>
+              <p><b>Paused:</b> ${status.paused}</p>
+              <p><b>Stop requested:</b> ${status.stopRequested}</p>
+              <p><b>Has checkpoint:</b> ${status.hasCheckpoint}</p>
+              ${checkpoint}
+            `,
+            html: true
+        })
+    } catch (e) {
+        errorNotification(e, $q)
+    }
+}
+
+async function pauseRun() {
+    try {
+        await metadataService.pauseLibraryRun(libraryId())
+        $q.notify({
+            message: 'Pause requested for current library run',
+            color: 'secondary',
+            closeBtn: true,
+            timeout: 5000
+        })
+    } catch (e) {
+        errorNotification(e, $q)
+    }
+}
+
+async function resumeRunContinue() {
+    try {
+        await metadataService.resumeLibraryRun(libraryId(), 'CONTINUE')
+        $q.notify({
+            message: 'Resume requested (continue from checkpoint)',
+            color: 'secondary',
+            closeBtn: true,
+            timeout: 5000
+        })
+    } catch (e) {
+        errorNotification(e, $q)
+    }
+}
+
+async function resumeRunNew() {
+    $q.dialog({
+        component: ConfirmationDialog,
+        componentProps: {
+            title: 'Resume Run (New)',
+            bodyHtml: 'Start a new library run from the beginning? Existing checkpoint will be discarded.',
+            confirmText: 'Yes, start new run',
+            buttonConfirm: 'Start New',
+            buttonConfirmColor: 'warning'
+        }
+    }).onOk(async () => {
+        try {
+            await metadataService.resumeLibraryRun(libraryId(), 'NEW')
+            $q.notify({
+                message: 'Resume requested (new run from start)',
+                color: 'secondary',
+                closeBtn: true,
+                timeout: 5000
+            })
+        } catch (e) {
+            errorNotification(e, $q)
+        }
+    })
+}
+
+async function stopRun() {
+    $q.dialog({
+        component: ConfirmationDialog,
+        componentProps: {
+            title: 'Stop Run',
+            bodyHtml: 'Stop current library run now? Progress checkpoint will be saved for continue-resume.',
+            confirmText: 'Yes, stop run',
+            buttonConfirm: 'Stop',
+            buttonConfirmColor: 'negative'
+        }
+    }).onOk(async () => {
+        try {
+            await metadataService.stopLibraryRun(libraryId())
+            $q.notify({
+                message: 'Stop requested. Run will halt and save checkpoint.',
+                color: 'warning',
+                closeBtn: true,
+                timeout: 6000
+            })
+        } catch (e) {
+            errorNotification(e, $q)
+        }
+    })
 }
 
 function promptResetLibrary() {
