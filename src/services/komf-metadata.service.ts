@@ -1,5 +1,11 @@
 import axios, { type AxiosInstance } from 'axios'
-import type { IdentifyRequest, SearchResult } from '@/types/metadata'
+import type {
+    IdentifyRequest,
+    LibraryRunSummary,
+    RetrySkippedSeriesResponse,
+    SearchResult,
+    SkippedSeriesEntry
+} from '@/types/metadata'
 import { useSettingsStore } from '@/stores/settings'
 
 export default class KomfMetadataService {
@@ -90,6 +96,62 @@ export default class KomfMetadataService {
             )
         } catch (e) {
             let msg = 'Failed to reset library'
+            if (axios.isAxiosError(e)) {
+                msg += `: ${e.message}`
+            }
+            throw new Error(msg)
+        }
+    }
+
+    async getSkippedSeries(libraryId: string): Promise<SkippedSeriesEntry[]> {
+        try {
+            return (
+                await this.http.get(
+                    `${this.settings.komfUrl}/${this.settings.mediaServer}/skipped/library/${libraryId}`
+                )
+            ).data
+        } catch (e) {
+            let msg = 'Failed to get skipped series'
+            if (axios.isAxiosError(e)) {
+                msg += `: ${e.message}`
+            }
+            throw new Error(msg)
+        }
+    }
+
+    async retrySkippedSeries(
+        libraryId: string,
+        dryRun: boolean = false
+    ): Promise<RetrySkippedSeriesResponse> {
+        try {
+            return (
+                await this.http.post(
+                    `${this.settings.komfUrl}/${this.settings.mediaServer}/retry-skipped/library/${libraryId}`,
+                    undefined,
+                    { params: { dryRun } }
+                )
+            ).data
+        } catch (e) {
+            let msg = 'Failed to retry skipped series'
+            if (axios.isAxiosError(e)) {
+                msg += `: ${e.message}`
+            }
+            throw new Error(msg)
+        }
+    }
+
+    async latestLibrarySummary(libraryId: string): Promise<LibraryRunSummary | null> {
+        try {
+            return (
+                await this.http.get(
+                    `${this.settings.komfUrl}/${this.settings.mediaServer}/summary/library/${libraryId}/latest`
+                )
+            ).data
+        } catch (e) {
+            if (axios.isAxiosError(e) && e.response?.status == 404) {
+                return null
+            }
+            let msg = 'Failed to get latest library summary'
             if (axios.isAxiosError(e)) {
                 msg += `: ${e.message}`
             }

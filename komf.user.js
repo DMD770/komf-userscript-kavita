@@ -11306,74 +11306,74 @@ body.body--dark {
 [data-v-e95f9e5e] .col {
     flex: 10000 1 0;
 }
-}.row[data-v-2de3bff8] {
+}.row[data-v-dde288b2] {
   margin: 0;
 }
-.col[data-v-2de3bff8], .col-auto[data-v-2de3bff8] {
+.col[data-v-dde288b2], .col-auto[data-v-dde288b2] {
   padding: 0;
 }
-.row + .row[data-v-2de3bff8] {
+.row + .row[data-v-dde288b2] {
   margin: 0;
 }
-[data-v-2de3bff8] .q-checkbox>* {
+[data-v-dde288b2] .q-checkbox>* {
   width: auto;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-2de3bff8] .q-tab__content>* {
+[data-v-dde288b2] .q-tab__content>* {
   flex-shrink: unset;
 }
-[data-v-2de3bff8] .q-tabs>* {
+[data-v-dde288b2] .q-tabs>* {
   width: auto;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-2de3bff8] .q-space {
+[data-v-dde288b2] .q-space {
   width: auto;
 }
-[data-v-2de3bff8] .q-splitter {
+[data-v-dde288b2] .q-splitter {
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-2de3bff8] .q-splitter>* {
+[data-v-dde288b2] .q-splitter>* {
   width: 1px;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-2de3bff8] .row {
+[data-v-dde288b2] .row {
   margin: 0;
   --bs-gutter-x: unset;
   --bs-gutter-y: unset;
 }
-[data-v-2de3bff8] .col {
+[data-v-dde288b2] .col {
   padding: 0;
 }
-[data-v-2de3bff8] .row + .row {
+[data-v-dde288b2] .row + .row {
   margin: 0;
 }
-.bg-dark[data-v-2de3bff8] {
+.bg-dark[data-v-dde288b2] {
   background: unset;
 }
-[data-v-2de3bff8] input:not([type=range]) {
+[data-v-dde288b2] input:not([type=range]) {
   background-color: unset;
   border-color: unset;
 }
-[data-v-2de3bff8] input:not([type=range]):focus {
+[data-v-dde288b2] input:not([type=range]):focus {
   border-color: unset;
   background-color: unset;
   box-shadow: unset;
 }
-[data-v-2de3bff8] .hidden {
+[data-v-dde288b2] .hidden {
   display: none !important;
 }
-[data-v-2de3bff8] .q-field__append {
+[data-v-dde288b2] .q-field__append {
   width: auto;
 }
-[data-v-2de3bff8] .q-chip {
+[data-v-dde288b2] .q-chip {
   width: auto;
 }
 @media (min-width: 0) {
-[data-v-2de3bff8] .col {
+[data-v-dde288b2] .col {
     flex: 10000 1 0;
 }
 }.row[data-v-d80e76e9] {
@@ -21429,6 +21429,51 @@ class KomfMetadataService {
       );
     } catch (e) {
       let msg = "Failed to reset library";
+      if (axios$1.isAxiosError(e)) {
+        msg += `: ${e.message}`;
+      }
+      throw new Error(msg);
+    }
+  }
+  async getSkippedSeries(libraryId) {
+    try {
+      return (await this.http.get(
+        `${this.settings.komfUrl}/${this.settings.mediaServer}/skipped/library/${libraryId}`
+      )).data;
+    } catch (e) {
+      let msg = "Failed to get skipped series";
+      if (axios$1.isAxiosError(e)) {
+        msg += `: ${e.message}`;
+      }
+      throw new Error(msg);
+    }
+  }
+  async retrySkippedSeries(libraryId, dryRun = false) {
+    try {
+      return (await this.http.post(
+        `${this.settings.komfUrl}/${this.settings.mediaServer}/retry-skipped/library/${libraryId}`,
+        void 0,
+        { params: { dryRun } }
+      )).data;
+    } catch (e) {
+      let msg = "Failed to retry skipped series";
+      if (axios$1.isAxiosError(e)) {
+        msg += `: ${e.message}`;
+      }
+      throw new Error(msg);
+    }
+  }
+  async latestLibrarySummary(libraryId) {
+    var _a2;
+    try {
+      return (await this.http.get(
+        `${this.settings.komfUrl}/${this.settings.mediaServer}/summary/library/${libraryId}/latest`
+      )).data;
+    } catch (e) {
+      if (axios$1.isAxiosError(e) && ((_a2 = e.response) == null ? void 0 : _a2.status) == 404) {
+        return null;
+      }
+      let msg = "Failed to get latest library summary";
       if (axios$1.isAxiosError(e)) {
         msg += `: ${e.message}`;
       }
@@ -39322,6 +39367,111 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
         timeout: 5e3
       });
     }
+    function escapeHtml(value2) {
+      return value2.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+    }
+    async function viewSkippedSeries() {
+      try {
+        const skipped = await metadataService.getSkippedSeries(libraryId());
+        if (skipped.length === 0) {
+          $q.notify({
+            message: "No skipped series found",
+            color: "secondary",
+            closeBtn: true,
+            timeout: 5e3
+          });
+          return;
+        }
+        const lines = skipped.slice(0, 30).map((entry) => {
+          const label = entry.hintedName || entry.hintedSortName || "(unknown title)";
+          return `<li><b>${escapeHtml(label)}</b> [${escapeHtml(entry.oldSeriesId)}] - ${escapeHtml(entry.reason)}</li>`;
+        }).join("");
+        const more = skipped.length > 30 ? `<p>...and ${skipped.length - 30} more</p>` : "";
+        $q.dialog({
+          title: `Skipped Series (${skipped.length})`,
+          message: `<ul>${lines}</ul>${more}`,
+          html: true
+        });
+      } catch (e) {
+        errorNotification(e, $q);
+      }
+    }
+    async function retrySkippedSeries() {
+      let skippedCount = 0;
+      try {
+        skippedCount = (await metadataService.getSkippedSeries(libraryId())).length;
+        if (skippedCount === 0) {
+          $q.notify({
+            message: "No skipped series to retry",
+            color: "secondary",
+            closeBtn: true,
+            timeout: 5e3
+          });
+          return;
+        }
+      } catch (e) {
+        errorNotification(e, $q);
+        return;
+      }
+      $q.dialog({
+        component: ConfirmationDialog,
+        componentProps: {
+          title: "Retry Skipped Series",
+          bodyHtml: `Retry ${skippedCount} skipped entries with ID remap?<br/>This queues only resolved series and defers scan.`,
+          confirmText: "Yes, retry skipped",
+          buttonConfirm: "Retry",
+          buttonConfirmColor: "secondary"
+        }
+      }).onOk(async () => {
+        try {
+          const result = await metadataService.retrySkippedSeries(libraryId(), false);
+          $q.notify({
+            message: `Retry queued: ${result.retried}/${result.totalSkipped} (unresolved: ${result.unresolved})`,
+            color: result.unresolved > 0 ? "warning" : "secondary",
+            closeBtn: true,
+            timeout: 7e3
+          });
+        } catch (e) {
+          errorNotification(e, $q);
+        }
+      });
+    }
+    function formatDurationMs(startedAtEpochMs, finishedAtEpochMs) {
+      const totalSeconds = Math.max(0, Math.floor((finishedAtEpochMs - startedAtEpochMs) / 1e3));
+      const minutes = Math.floor(totalSeconds / 60);
+      const seconds = totalSeconds % 60;
+      return `${minutes}m ${seconds}s`;
+    }
+    async function viewLatestSummary() {
+      try {
+        const summary = await metadataService.latestLibrarySummary(libraryId());
+        if (!summary) {
+          $q.notify({
+            message: "No library summary available yet",
+            color: "secondary",
+            closeBtn: true,
+            timeout: 5e3
+          });
+          return;
+        }
+        const started = new Date(summary.startedAtEpochMs).toLocaleString();
+        const duration = formatDurationMs(summary.startedAtEpochMs, summary.finishedAtEpochMs);
+        const message = `
+          <p><b>Started:</b> ${escapeHtml(started)} (${escapeHtml(duration)})</p>
+          <p><b>Series:</b> total ${summary.totalSeries}, processed ${summary.processedSeries}, updated ${summary.updatedSeries}</p>
+          <p><b>Skipped:</b> ${summary.skippedSeries}, <b>Unmatched:</b> ${summary.unmatchedSeries}</p>
+          <p><b>Errors:</b> provider ${summary.providerErrors}, processing ${summary.processingErrors}, unexpected ${summary.unexpectedErrors}</p>
+          <p><b>Dry run:</b> ${summary.dryRun ? "yes" : "no"}</p>
+        `;
+        $q.dialog({
+          title: "Latest Library Summary",
+          message,
+          html: true
+        });
+      } catch (e) {
+        errorNotification(e, $q);
+      }
+    }
     function promptResetLibrary() {
       $q.dialog({
         component: ConfirmationDialog,
@@ -39367,6 +39517,63 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
           ]),
           withDirectives((openBlock(), createBlock(QItem, {
             clickable: "",
+            onClick: viewSkippedSeries
+          }, {
+            default: withCtx(() => [
+              createVNode(QItemSection, {
+                class: "text-body2 text-weight-medium",
+                "no-wrap": ""
+              }, {
+                default: withCtx(() => [
+                  createTextVNode("View Skipped Series")
+                ]),
+                _: 1
+              })
+            ]),
+            _: 1
+          })), [
+            [ClosePopup]
+          ]),
+          withDirectives((openBlock(), createBlock(QItem, {
+            clickable: "",
+            onClick: retrySkippedSeries
+          }, {
+            default: withCtx(() => [
+              createVNode(QItemSection, {
+                class: "text-body2 text-weight-medium",
+                "no-wrap": ""
+              }, {
+                default: withCtx(() => [
+                  createTextVNode("Retry Skipped Series")
+                ]),
+                _: 1
+              })
+            ]),
+            _: 1
+          })), [
+            [ClosePopup]
+          ]),
+          withDirectives((openBlock(), createBlock(QItem, {
+            clickable: "",
+            onClick: viewLatestSummary
+          }, {
+            default: withCtx(() => [
+              createVNode(QItemSection, {
+                class: "text-body2 text-weight-medium",
+                "no-wrap": ""
+              }, {
+                default: withCtx(() => [
+                  createTextVNode("View Latest Summary")
+                ]),
+                _: 1
+              })
+            ]),
+            _: 1
+          })), [
+            [ClosePopup]
+          ]),
+          withDirectives((openBlock(), createBlock(QItem, {
+            clickable: "",
             onClick: promptResetLibrary
           }, {
             default: withCtx(() => [
@@ -39390,8 +39597,8 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const LibraryActionsMenu_vue_vue_type_style_index_0_scoped_2de3bff8_lang = "";
-const LibraryActionsMenu = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-2de3bff8"]]);
+const LibraryActionsMenu_vue_vue_type_style_index_0_scoped_dde288b2_lang = "";
+const LibraryActionsMenu = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-dde288b2"]]);
 const _sfc_main$5 = /* @__PURE__ */ defineComponent({
   __name: "KomgaLibraryActions",
   setup(__props) {
@@ -39976,3 +40183,4 @@ app.provide(httpKey, http);
 app.provide(komfMetadataKey, komfMetadata);
 app.provide(komfConfigKey, komfConfig);
 app.mount(mountElement);
+
