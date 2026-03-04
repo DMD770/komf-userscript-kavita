@@ -95,6 +95,14 @@
             <div class="col-auto">
               <q-checkbox v-model="model.default.bookCovers" label="Book Cover" />
             </div>
+
+            <div class="col-auto">
+              <q-checkbox v-model="model.default.lockSeriesCover" label="Lock Series Cover" />
+            </div>
+
+            <div class="col-auto">
+              <q-checkbox v-model="model.default.lockVolumeCover" label="Lock Volume Cover" />
+            </div>
           </div>
         </div>
 
@@ -240,6 +248,14 @@
               <div class="col-auto">
                 <q-checkbox v-model="model.library[libraryIndex].bookCovers" label="Book Cover" />
               </div>
+
+              <div class="col-auto">
+                <q-checkbox v-model="model.library[libraryIndex].lockSeriesCover" label="Lock Series Cover" />
+              </div>
+
+              <div class="col-auto">
+                <q-checkbox v-model="model.library[libraryIndex].lockVolumeCover" label="Lock Volume Cover" />
+              </div>
             </div>
           </div>
 
@@ -383,6 +399,9 @@ async function addLibrary(id: string) {
         modes: ['API'],
         bookCovers: false,
         seriesCovers: false,
+        lockCovers: false,
+        lockSeriesCover: false,
+        lockVolumeCover: false,
         overrideExistingCovers: true,
         seriesTitle: false,
         seriesTitleLanguage: 'en',

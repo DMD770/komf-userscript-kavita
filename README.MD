@@ -1,6 +1,6 @@
-# [Komf](https://github.com/Snd-R/komf) user script for Komga and Kavita
+# [Komf](https://github.com/Snd-R/komf) userscript fork (Kavita-focused)
 
-Adds komf integration to Komga and Kavita ui.
+Adds KOMF integration to Komga/Kavita UI, with this fork focused on Kavita workflows.
 
 ---
 
@@ -9,6 +9,15 @@ Adds komf integration to Komga and Kavita ui.
 - Config dialog in main view
 - Menu in library toolbar with option to automatically identify all series inside
 - Menu in series toolbar with options to manually or automatically match current series
+
+### Fork notes
+
+- This fork tracks custom Kavita-focused behavior and config UX updates.
+- Cover lock controls are split in settings:
+  - `Lock Series Cover`
+  - `Lock Volume Cover`
+- Official extension may still show a combined `Lock Covers` toggle. This userscript fork exposes both flags separately.
+- KOMF server URL still defaults to `http://localhost:8085` in UI settings; change it in Settings for custom instances.
 
 ### Installation
 

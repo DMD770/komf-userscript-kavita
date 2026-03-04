@@ -51,6 +51,9 @@ export interface MetadataProcessingConfigUpdateDto {
     bookCovers?: boolean,
     seriesCovers?: boolean,
     overrideExistingCovers?: boolean,
+    lockCovers?: boolean,
+    lockSeriesCover?: boolean,
+    lockVolumeCover?: boolean,
     updateModes?: string[],
     postProcessing?: MetadataPostProcessingConfigUpdateDto
 }
@@ -183,6 +186,9 @@ export interface MetadataProcessingConfigDto {
     bookCovers: boolean,
     seriesCovers: boolean,
     overrideExistingCovers: boolean,
+    lockCovers?: boolean,
+    lockSeriesCover?: boolean,
+    lockVolumeCover?: boolean,
     updateModes: string[],
     postProcessing: MetadataPostProcessingConfigDto
 }

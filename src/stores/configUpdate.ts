@@ -100,6 +100,9 @@ export const useConfigUpdateStore = defineStore('settingsUpdate', () => {
             bookCovers: false,
             seriesCovers: false,
             overrideExistingCovers: true,
+            lockCovers: false,
+            lockSeriesCover: false,
+            lockVolumeCover: false,
             seriesTitle: false,
             seriesTitleLanguage: 'en',
             alternativeTitles: false,
@@ -139,6 +142,9 @@ export const useConfigUpdateStore = defineStore('settingsUpdate', () => {
             modes: ['API'],
             bookCovers: false,
             seriesCovers: false,
+            lockCovers: false,
+            lockSeriesCover: false,
+            lockVolumeCover: false,
             seriesTitle: false,
             seriesTitleLanguage: 'en',
             alternativeTitles: false,
@@ -241,6 +247,20 @@ export const useConfigUpdateStore = defineStore('settingsUpdate', () => {
         komgaMetadata.default.bookCovers = config.komga.metadataUpdate.default.bookCovers
         komgaMetadata.default.seriesCovers = config.komga.metadataUpdate.default.seriesCovers
         komgaMetadata.default.overrideExistingCovers = config.komga.metadataUpdate.default.overrideExistingCovers
+        komgaMetadata.default.lockSeriesCover = (
+            config.komga.metadataUpdate.default.lockSeriesCover
+            ?? config.komga.metadataUpdate.default.lockCovers
+            ?? false
+        )
+        komgaMetadata.default.lockVolumeCover = (
+            config.komga.metadataUpdate.default.lockVolumeCover
+            ?? config.komga.metadataUpdate.default.lockCovers
+            ?? false
+        )
+        komgaMetadata.default.lockCovers = (
+            komgaMetadata.default.lockSeriesCover
+            || komgaMetadata.default.lockVolumeCover
+        )
         komgaMetadata.default.seriesTitle = config.komga.metadataUpdate.default.postProcessing.seriesTitle
         komgaMetadata.default.seriesTitleLanguage = config.komga.metadataUpdate.default.postProcessing.seriesTitleLanguage
         komgaMetadata.default.orderBooks = config.komga.metadataUpdate.default.postProcessing.orderBooks
@@ -263,6 +283,20 @@ export const useConfigUpdateStore = defineStore('settingsUpdate', () => {
                     bookCovers: libraryConfig.bookCovers,
                     seriesCovers: libraryConfig.seriesCovers,
                     overrideExistingCovers: libraryConfig.overrideExistingCovers,
+                    lockSeriesCover: (
+                        libraryConfig.lockSeriesCover
+                        ?? libraryConfig.lockCovers
+                        ?? false
+                    ),
+                    lockVolumeCover: (
+                        libraryConfig.lockVolumeCover
+                        ?? libraryConfig.lockCovers
+                        ?? false
+                    ),
+                    lockCovers: (
+                        (libraryConfig.lockSeriesCover ?? libraryConfig.lockCovers ?? false)
+                        || (libraryConfig.lockVolumeCover ?? libraryConfig.lockCovers ?? false)
+                    ),
                     seriesTitle: libraryConfig.postProcessing.seriesTitle,
                     seriesTitleLanguage: libraryConfig.postProcessing.seriesTitleLanguage,
                     orderBooks: libraryConfig.postProcessing.orderBooks,
@@ -291,6 +325,20 @@ export const useConfigUpdateStore = defineStore('settingsUpdate', () => {
         kavitaMetadata.default.bookCovers = config.kavita.metadataUpdate.default.bookCovers
         kavitaMetadata.default.seriesCovers = config.kavita.metadataUpdate.default.seriesCovers
         kavitaMetadata.default.overrideExistingCovers = config.kavita.metadataUpdate.default.overrideExistingCovers
+        kavitaMetadata.default.lockSeriesCover = (
+            config.kavita.metadataUpdate.default.lockSeriesCover
+            ?? config.kavita.metadataUpdate.default.lockCovers
+            ?? false
+        )
+        kavitaMetadata.default.lockVolumeCover = (
+            config.kavita.metadataUpdate.default.lockVolumeCover
+            ?? config.kavita.metadataUpdate.default.lockCovers
+            ?? false
+        )
+        kavitaMetadata.default.lockCovers = (
+            kavitaMetadata.default.lockSeriesCover
+            || kavitaMetadata.default.lockVolumeCover
+        )
         kavitaMetadata.default.seriesTitle = config.kavita.metadataUpdate.default.postProcessing.seriesTitle
         kavitaMetadata.default.seriesTitleLanguage = config.kavita.metadataUpdate.default.postProcessing.seriesTitleLanguage
         kavitaMetadata.default.languageValue = config.kavita.metadataUpdate.default.postProcessing.languageValue
@@ -311,6 +359,20 @@ export const useConfigUpdateStore = defineStore('settingsUpdate', () => {
                     bookCovers: libraryConfig.bookCovers,
                     seriesCovers: libraryConfig.seriesCovers,
                     overrideExistingCovers: libraryConfig.overrideExistingCovers,
+                    lockSeriesCover: (
+                        libraryConfig.lockSeriesCover
+                        ?? libraryConfig.lockCovers
+                        ?? false
+                    ),
+                    lockVolumeCover: (
+                        libraryConfig.lockVolumeCover
+                        ?? libraryConfig.lockCovers
+                        ?? false
+                    ),
+                    lockCovers: (
+                        (libraryConfig.lockSeriesCover ?? libraryConfig.lockCovers ?? false)
+                        || (libraryConfig.lockVolumeCover ?? libraryConfig.lockCovers ?? false)
+                    ),
                     seriesTitle: libraryConfig.postProcessing.seriesTitle,
                     seriesTitleLanguage: libraryConfig.postProcessing.seriesTitleLanguage,
                     orderBooks: libraryConfig.postProcessing.orderBooks,
@@ -409,6 +471,28 @@ export const useConfigUpdateStore = defineStore('settingsUpdate', () => {
             changes.seriesCovers = patch.seriesCovers
         if (patch.overrideExistingCovers != current?.overrideExistingCovers)
             changes.overrideExistingCovers = patch.overrideExistingCovers
+        const currentLockSeriesCover = current?.lockSeriesCover ?? current?.lockCovers ?? false
+        const currentLockVolumeCover = current?.lockVolumeCover ?? current?.lockCovers ?? false
+        const currentLockCovers = (
+            current?.lockCovers
+            ?? (
+                currentLockSeriesCover
+                || currentLockVolumeCover
+            )
+        )
+        const patchLockSeriesCover = patch.lockSeriesCover ?? patch.lockCovers ?? false
+        const patchLockVolumeCover = patch.lockVolumeCover ?? patch.lockCovers ?? false
+        const patchLockCovers = patch.lockCovers ?? (patchLockSeriesCover || patchLockVolumeCover)
+
+        if (patchLockSeriesCover !== currentLockSeriesCover) {
+            changes.lockSeriesCover = patchLockSeriesCover
+        }
+        if (patchLockVolumeCover !== currentLockVolumeCover) {
+            changes.lockVolumeCover = patchLockVolumeCover
+        }
+        if (patchLockCovers !== currentLockCovers) {
+            changes.lockCovers = patchLockCovers
+        }
         if (!patch.modes.every((v, i) => v === current?.updateModes[i]))
             changes.updateModes = patch.modes
 
@@ -765,6 +849,9 @@ export interface ProcessingUpdateModel {
     bookCovers: boolean,
     seriesCovers: boolean,
     overrideExistingCovers: boolean,
+    lockCovers?: boolean,
+    lockSeriesCover?: boolean,
+    lockVolumeCover?: boolean,
     orderBooks: boolean,
     readingDirectionValue?: null | string,
     languageValue?: null | string,
