@@ -25,7 +25,7 @@
       <q-item-section class="text-body2 text-weight-medium" no-wrap>Resume Run (New)</q-item-section>
     </q-item>
     <q-item clickable v-close-popup @click="stopRun">
-      <q-item-section class="text-body2 text-weight-medium" no-wrap>Stop Run</q-item-section>
+      <q-item-section class="text-body2 text-weight-medium" no-wrap>Safe Stop Run</q-item-section>
     </q-item>
     <q-item clickable v-close-popup @click="promptResetLibrary">
       <q-item-section class="text-body2 text-weight-medium" no-wrap>Reset Metadata</q-item-section>
@@ -283,17 +283,17 @@ async function stopRun() {
     $q.dialog({
         component: ConfirmationDialog,
         componentProps: {
-            title: 'Stop Run',
-            bodyHtml: 'Stop current library run now? Progress checkpoint will be saved for continue-resume.',
-            confirmText: 'Yes, stop run',
-            buttonConfirm: 'Stop',
+            title: 'Safe Stop Run',
+            bodyHtml: 'Request a safe stop? KOMF will finish the current series, then stop and save a checkpoint for resume.',
+            confirmText: 'Yes, safe stop',
+            buttonConfirm: 'Safe Stop',
             buttonConfirmColor: 'negative'
         }
     }).onOk(async () => {
         try {
             await metadataService.stopLibraryRun(libraryId())
             $q.notify({
-                message: 'Stop requested. Run will halt and save checkpoint.',
+                message: 'Safe stop requested. Current series will finish, then run stops with a checkpoint.',
                 color: 'warning',
                 closeBtn: true,
                 timeout: 6000

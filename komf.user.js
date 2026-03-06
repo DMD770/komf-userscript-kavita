@@ -11307,74 +11307,74 @@ body.body--dark {
 [data-v-e95f9e5e] .col {
     flex: 10000 1 0;
 }
-}.row[data-v-3c166eb2] {
+}.row[data-v-d9fce3cd] {
   margin: 0;
 }
-.col[data-v-3c166eb2], .col-auto[data-v-3c166eb2] {
+.col[data-v-d9fce3cd], .col-auto[data-v-d9fce3cd] {
   padding: 0;
 }
-.row + .row[data-v-3c166eb2] {
+.row + .row[data-v-d9fce3cd] {
   margin: 0;
 }
-[data-v-3c166eb2] .q-checkbox>* {
+[data-v-d9fce3cd] .q-checkbox>* {
   width: auto;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-3c166eb2] .q-tab__content>* {
+[data-v-d9fce3cd] .q-tab__content>* {
   flex-shrink: unset;
 }
-[data-v-3c166eb2] .q-tabs>* {
+[data-v-d9fce3cd] .q-tabs>* {
   width: auto;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-3c166eb2] .q-space {
+[data-v-d9fce3cd] .q-space {
   width: auto;
 }
-[data-v-3c166eb2] .q-splitter {
+[data-v-d9fce3cd] .q-splitter {
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-3c166eb2] .q-splitter>* {
+[data-v-d9fce3cd] .q-splitter>* {
   width: 1px;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-3c166eb2] .row {
+[data-v-d9fce3cd] .row {
   margin: 0;
   --bs-gutter-x: unset;
   --bs-gutter-y: unset;
 }
-[data-v-3c166eb2] .col {
+[data-v-d9fce3cd] .col {
   padding: 0;
 }
-[data-v-3c166eb2] .row + .row {
+[data-v-d9fce3cd] .row + .row {
   margin: 0;
 }
-.bg-dark[data-v-3c166eb2] {
+.bg-dark[data-v-d9fce3cd] {
   background: unset;
 }
-[data-v-3c166eb2] input:not([type=range]) {
+[data-v-d9fce3cd] input:not([type=range]) {
   background-color: unset;
   border-color: unset;
 }
-[data-v-3c166eb2] input:not([type=range]):focus {
+[data-v-d9fce3cd] input:not([type=range]):focus {
   border-color: unset;
   background-color: unset;
   box-shadow: unset;
 }
-[data-v-3c166eb2] .hidden {
+[data-v-d9fce3cd] .hidden {
   display: none !important;
 }
-[data-v-3c166eb2] .q-field__append {
+[data-v-d9fce3cd] .q-field__append {
   width: auto;
 }
-[data-v-3c166eb2] .q-chip {
+[data-v-d9fce3cd] .q-chip {
   width: auto;
 }
 @media (min-width: 0) {
-[data-v-3c166eb2] .col {
+[data-v-d9fce3cd] .col {
     flex: 10000 1 0;
 }
 }.row[data-v-d80e76e9] {
@@ -39647,17 +39647,17 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
       $q.dialog({
         component: ConfirmationDialog,
         componentProps: {
-          title: "Stop Run",
-          bodyHtml: "Stop current library run now? Progress checkpoint will be saved for continue-resume.",
-          confirmText: "Yes, stop run",
-          buttonConfirm: "Stop",
+          title: "Safe Stop Run",
+          bodyHtml: "Request a safe stop? KOMF will finish the current series, then stop and save a checkpoint for resume.",
+          confirmText: "Yes, safe stop",
+          buttonConfirm: "Safe Stop",
           buttonConfirmColor: "negative"
         }
       }).onOk(async () => {
         try {
           await metadataService.stopLibraryRun(libraryId());
           $q.notify({
-            message: "Stop requested. Run will halt and save checkpoint.",
+            message: "Safe stop requested. Current series will finish, then run stops with a checkpoint.",
             color: "warning",
             closeBtn: true,
             timeout: 6e3
@@ -39853,7 +39853,7 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
                 "no-wrap": ""
               }, {
                 default: withCtx(() => [
-                  createTextVNode("Stop Run")
+                  createTextVNode("Safe Stop Run")
                 ]),
                 _: 1
               })
@@ -39887,8 +39887,8 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const LibraryActionsMenu_vue_vue_type_style_index_0_scoped_3c166eb2_lang = "";
-const LibraryActionsMenu = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-3c166eb2"]]);
+const LibraryActionsMenu_vue_vue_type_style_index_0_scoped_d9fce3cd_lang = "";
+const LibraryActionsMenu = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-d9fce3cd"]]);
 const _sfc_main$5 = /* @__PURE__ */ defineComponent({
   __name: "KomgaLibraryActions",
   setup(__props) {
