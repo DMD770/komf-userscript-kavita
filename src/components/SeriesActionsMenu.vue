@@ -104,11 +104,13 @@ async function resetSeries() {
 async function autoIdentify() {
     loading.value = true
     try {
-        await metadataService.matchSeries(libraryId(), seriesId())
+        const jobId = await metadataService.matchSeries(libraryId(), seriesId())
+        await metadataService.waitForJobCompletion(jobId)
     } catch (e) {
         errorNotification(e, $q)
+    } finally {
+        loading.value = false
     }
-    loading.value = false
 }
 </script>
 

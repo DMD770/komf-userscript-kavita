@@ -62,3 +62,15 @@ export interface LibraryRunControlStatus {
 }
 
 export type LibraryRunResumeMode = 'CONTINUE' | 'NEW'
+
+export interface MetadataJobResponse {
+    jobId: string
+}
+
+export type MetadataJobStatus = 'RUNNING' | 'FAILED' | 'COMPLETED'
+
+export interface MetadataJob {
+    id: string,
+    status: MetadataJobStatus,
+    message?: string | null,
+}

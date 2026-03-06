@@ -4,6 +4,8 @@ import type {
     LibraryRunControlStatus,
     LibraryRunResumeMode,
     LibraryRunSummary,
+    MetadataJob,
+    MetadataJobResponse,
     RetrySkippedSeriesResponse,
     SearchResult,
     SkippedSeriesEntry
@@ -24,6 +26,14 @@ export default class KomfMetadataService {
         return [
             `${base}/api/${server}/metadata${path}`,
             `${base}/${server}${path}`
+        ]
+    }
+
+    private jobUrls(path: string, baseUrl: string = this.settings.komfUrl): string[] {
+        const base = baseUrl.replace(/\/+$/, '')
+        return [
+            `${base}/api/jobs${path}`,
+            `${base}/jobs${path}`
         ]
     }
 
@@ -55,6 +65,20 @@ export default class KomfMetadataService {
         throw lastError
     }
 
+    private async getJobWithFallback<T>(path: string, config?: any): Promise<T> {
+        const urls = this.jobUrls(path)
+        let lastError: unknown
+        for (const url of urls) {
+            try {
+                return (await this.http.get(url, config)).data
+            } catch (e) {
+                lastError = e
+                if (!axios.isAxiosError(e) || e.response?.status !== 404) throw e
+            }
+        }
+        throw lastError
+    }
+
     async searchSeries(seriesName: string, libraryId?: string, seriesId?: string): Promise<SearchResult[]> {
         try {
             return await this.getWithFallback<SearchResult[]>('/search', {
@@ -73,10 +97,17 @@ export default class KomfMetadataService {
 
     async identifySeries(request: IdentifyRequest) {
         try {
-            await this.postWithFallback('/identify', request)
+            const response = await this.postWithFallback('/identify', request)
+            const data = response.data as MetadataJobResponse
+            if (!data?.jobId) {
+                throw new Error('Missing jobId in response')
+            }
+            return data.jobId
         } catch (e) {
             let msg = 'Failed to identify series'
             if (axios.isAxiosError(e)) {
+                msg += `: ${e.message}`
+            } else if (e instanceof Error) {
                 msg += `: ${e.message}`
             }
             throw new Error(msg)
@@ -96,16 +127,48 @@ export default class KomfMetadataService {
         }
     }
 
-    async matchSeries(libraryId: string, seriesId: string) {
+    async matchSeries(libraryId: string, seriesId: string): Promise<string> {
         try {
-            await this.postWithFallback(`/match/library/${libraryId}/series/${seriesId}`)
+            const response = await this.postWithFallback(`/match/library/${libraryId}/series/${seriesId}`)
+            const data = response.data as MetadataJobResponse
+            if (!data?.jobId) {
+                throw new Error('Missing jobId in response')
+            }
+            return data.jobId
         } catch (e) {
             let msg = 'Failed to match series'
+            if (axios.isAxiosError(e)) {
+                msg += `: ${e.message}`
+            } else if (e instanceof Error) {
+                msg += `: ${e.message}`
+            }
+            throw new Error(msg)
+        }
+    }
+
+    async getJob(jobId: string): Promise<MetadataJob> {
+        try {
+            return await this.getJobWithFallback<MetadataJob>(`/${jobId}`)
+        } catch (e) {
+            let msg = `Failed to get job ${jobId}`
             if (axios.isAxiosError(e)) {
                 msg += `: ${e.message}`
             }
             throw new Error(msg)
         }
+    }
+
+    async waitForJobCompletion(jobId: string, timeoutMs: number = 10 * 60 * 1000): Promise<MetadataJob> {
+        const startedAt = Date.now()
+        while (Date.now() - startedAt < timeoutMs) {
+            const job = await this.getJob(jobId)
+            if (job.status == 'COMPLETED') return job
+            if (job.status == 'FAILED') {
+                throw new Error(job.message ? `Job failed: ${job.message}` : 'Job failed')
+            }
+            await delay(1000)
+        }
+        throw new Error(`Timed out waiting for job ${jobId} to complete`)
     }
 
     async resetSeries(libraryId: string, seriesId: string) {
@@ -259,4 +322,8 @@ function formatAxiosError(e: any): string {
     const statusText = e.response?.statusText
     const detail = e.response?.data?.message ?? e.response?.data?.error ?? e.message
     return [status, statusText, detail].filter((x) => x != null && x !== '').join(' ')
+}
+
+function delay(ms: number): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve, ms))
 }

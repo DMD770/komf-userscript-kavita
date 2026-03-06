@@ -128,8 +128,12 @@ const libraryId = computed(() => {
 
 async function dialogConfirm() {
     loading.value = true
-    await editMetadata()
-    onDialogOK()
+    try {
+        const success = await editMetadata()
+        if (success) onDialogOK()
+    } finally {
+        loading.value = false
+    }
 }
 
 async function searchSeries() {
@@ -158,13 +162,16 @@ async function editMetadata() {
         }
 
         try {
-            await metadataService.identifySeries(request)
+            const jobId = await metadataService.identifySeries(request)
+            await metadataService.waitForJobCompletion(jobId)
+            return true
         } catch (e) {
             errorNotification(e, $q)
             onDialogCancel()
-            return
+            return false
         }
     }
+    return false
 }
 
 function selectResult(searchResult: SearchResult) {
