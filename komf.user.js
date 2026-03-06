@@ -12,7 +12,6 @@
 // @downloadURL  https://raw.githubusercontent.com/DMD770/komf-userscript-kavita/main/komf.user.js
 
 // ==/UserScript==
-
 (function(){"use strict";try{if(typeof document!="undefined"){var n=document.createElement("style");n.appendChild(document.createTextNode(`@charset "UTF-8";
 /* * Normalizing -- forked from Normalize.css v8
  * */
@@ -11097,144 +11096,144 @@ body.body--dark {
 }
 .item-border[data-v-452f1499] {
   border: 3px solid #FEC000;
-}.row[data-v-a3e9113d] {
+}.row[data-v-c545221e] {
   margin: 0;
 }
-.col[data-v-a3e9113d], .col-auto[data-v-a3e9113d] {
+.col[data-v-c545221e], .col-auto[data-v-c545221e] {
   padding: 0;
 }
-.row + .row[data-v-a3e9113d] {
+.row + .row[data-v-c545221e] {
   margin: 0;
 }
-[data-v-a3e9113d] .q-checkbox>* {
+[data-v-c545221e] .q-checkbox>* {
   width: auto;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-a3e9113d] .q-tab__content>* {
+[data-v-c545221e] .q-tab__content>* {
   flex-shrink: unset;
 }
-[data-v-a3e9113d] .q-tabs>* {
+[data-v-c545221e] .q-tabs>* {
   width: auto;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-a3e9113d] .q-space {
+[data-v-c545221e] .q-space {
   width: auto;
 }
-[data-v-a3e9113d] .q-splitter {
+[data-v-c545221e] .q-splitter {
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-a3e9113d] .q-splitter>* {
+[data-v-c545221e] .q-splitter>* {
   width: 1px;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-a3e9113d] .row {
+[data-v-c545221e] .row {
   margin: 0;
   --bs-gutter-x: unset;
   --bs-gutter-y: unset;
 }
-[data-v-a3e9113d] .col {
+[data-v-c545221e] .col {
   padding: 0;
 }
-[data-v-a3e9113d] .row + .row {
+[data-v-c545221e] .row + .row {
   margin: 0;
 }
-.bg-dark[data-v-a3e9113d] {
+.bg-dark[data-v-c545221e] {
   background: unset;
 }
-[data-v-a3e9113d] input:not([type=range]) {
+[data-v-c545221e] input:not([type=range]) {
   background-color: unset;
   border-color: unset;
 }
-[data-v-a3e9113d] input:not([type=range]):focus {
+[data-v-c545221e] input:not([type=range]):focus {
   border-color: unset;
   background-color: unset;
   box-shadow: unset;
 }
-[data-v-a3e9113d] .hidden {
+[data-v-c545221e] .hidden {
   display: none !important;
 }
-[data-v-a3e9113d] .q-field__append {
+[data-v-c545221e] .q-field__append {
   width: auto;
 }
-[data-v-a3e9113d] .q-chip {
+[data-v-c545221e] .q-chip {
   width: auto;
 }
 @media (min-width: 0) {
-[data-v-a3e9113d] .col {
+[data-v-c545221e] .col {
     flex: 10000 1 0;
 }
-}.row[data-v-34a2954d] {
+}.row[data-v-de6fdbd1] {
   margin: 0;
 }
-.col[data-v-34a2954d], .col-auto[data-v-34a2954d] {
+.col[data-v-de6fdbd1], .col-auto[data-v-de6fdbd1] {
   padding: 0;
 }
-.row + .row[data-v-34a2954d] {
+.row + .row[data-v-de6fdbd1] {
   margin: 0;
 }
-[data-v-34a2954d] .q-checkbox>* {
+[data-v-de6fdbd1] .q-checkbox>* {
   width: auto;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-34a2954d] .q-tab__content>* {
+[data-v-de6fdbd1] .q-tab__content>* {
   flex-shrink: unset;
 }
-[data-v-34a2954d] .q-tabs>* {
+[data-v-de6fdbd1] .q-tabs>* {
   width: auto;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-34a2954d] .q-space {
+[data-v-de6fdbd1] .q-space {
   width: auto;
 }
-[data-v-34a2954d] .q-splitter {
+[data-v-de6fdbd1] .q-splitter {
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-34a2954d] .q-splitter>* {
+[data-v-de6fdbd1] .q-splitter>* {
   width: 1px;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-34a2954d] .row {
+[data-v-de6fdbd1] .row {
   margin: 0;
   --bs-gutter-x: unset;
   --bs-gutter-y: unset;
 }
-[data-v-34a2954d] .col {
+[data-v-de6fdbd1] .col {
   padding: 0;
 }
-[data-v-34a2954d] .row + .row {
+[data-v-de6fdbd1] .row + .row {
   margin: 0;
 }
-.bg-dark[data-v-34a2954d] {
+.bg-dark[data-v-de6fdbd1] {
   background: unset;
 }
-[data-v-34a2954d] input:not([type=range]) {
+[data-v-de6fdbd1] input:not([type=range]) {
   background-color: unset;
   border-color: unset;
 }
-[data-v-34a2954d] input:not([type=range]):focus {
+[data-v-de6fdbd1] input:not([type=range]):focus {
   border-color: unset;
   background-color: unset;
   box-shadow: unset;
 }
-[data-v-34a2954d] .hidden {
+[data-v-de6fdbd1] .hidden {
   display: none !important;
 }
-[data-v-34a2954d] .q-field__append {
+[data-v-de6fdbd1] .q-field__append {
   width: auto;
 }
-[data-v-34a2954d] .q-chip {
+[data-v-de6fdbd1] .q-chip {
   width: auto;
 }
 @media (min-width: 0) {
-[data-v-34a2954d] .col {
+[data-v-de6fdbd1] .col {
     flex: 10000 1 0;
 }
 }.row[data-v-e95f9e5e] {
@@ -21363,6 +21362,13 @@ class KomfMetadataService {
       `${base}/${server}${path}`
     ];
   }
+  jobUrls(path, baseUrl = this.settings.komfUrl) {
+    const base = baseUrl.replace(/\/+$/, "");
+    return [
+      `${base}/api/jobs${path}`,
+      `${base}/jobs${path}`
+    ];
+  }
   async getWithFallback(path, config) {
     var _a2;
     const urls = this.metadataUrls(path);
@@ -21393,6 +21399,21 @@ class KomfMetadataService {
     }
     throw lastError;
   }
+  async getJobWithFallback(path, config) {
+    var _a2;
+    const urls = this.jobUrls(path);
+    let lastError;
+    for (const url of urls) {
+      try {
+        return (await this.http.get(url, config)).data;
+      } catch (e) {
+        lastError = e;
+        if (!axios$1.isAxiosError(e) || ((_a2 = e.response) == null ? void 0 : _a2.status) !== 404)
+          throw e;
+      }
+    }
+    throw lastError;
+  }
   async searchSeries(seriesName, libraryId, seriesId) {
     try {
       return await this.getWithFallback("/search", {
@@ -21409,10 +21430,17 @@ class KomfMetadataService {
   }
   async identifySeries(request) {
     try {
-      await this.postWithFallback("/identify", request);
+      const response = await this.postWithFallback("/identify", request);
+      const data = response.data;
+      if (!(data == null ? void 0 : data.jobId)) {
+        throw new Error("Missing jobId in response");
+      }
+      return data.jobId;
     } catch (e) {
       let msg = "Failed to identify series";
       if (axios$1.isAxiosError(e)) {
+        msg += `: ${e.message}`;
+      } else if (e instanceof Error) {
         msg += `: ${e.message}`;
       }
       throw new Error(msg);
@@ -21435,14 +21463,45 @@ class KomfMetadataService {
   }
   async matchSeries(libraryId, seriesId) {
     try {
-      await this.postWithFallback(`/match/library/${libraryId}/series/${seriesId}`);
+      const response = await this.postWithFallback(`/match/library/${libraryId}/series/${seriesId}`);
+      const data = response.data;
+      if (!(data == null ? void 0 : data.jobId)) {
+        throw new Error("Missing jobId in response");
+      }
+      return data.jobId;
     } catch (e) {
       let msg = "Failed to match series";
+      if (axios$1.isAxiosError(e)) {
+        msg += `: ${e.message}`;
+      } else if (e instanceof Error) {
+        msg += `: ${e.message}`;
+      }
+      throw new Error(msg);
+    }
+  }
+  async getJob(jobId) {
+    try {
+      return await this.getJobWithFallback(`/${jobId}`);
+    } catch (e) {
+      let msg = `Failed to get job ${jobId}`;
       if (axios$1.isAxiosError(e)) {
         msg += `: ${e.message}`;
       }
       throw new Error(msg);
     }
+  }
+  async waitForJobCompletion(jobId, timeoutMs = 10 * 60 * 1e3) {
+    const startedAt = Date.now();
+    while (Date.now() - startedAt < timeoutMs) {
+      const job = await this.getJob(jobId);
+      if (job.status == "COMPLETED")
+        return job;
+      if (job.status == "FAILED") {
+        throw new Error(job.message ? `Job failed: ${job.message}` : "Job failed");
+      }
+      await delay(1e3);
+    }
+    throw new Error(`Timed out waiting for job ${jobId} to complete`);
   }
   async resetSeries(libraryId, seriesId) {
     try {
@@ -21584,6 +21643,9 @@ function formatAxiosError(e) {
   const statusText = (_b = e.response) == null ? void 0 : _b.statusText;
   const detail = (_h = (_g = (_d = (_c = e.response) == null ? void 0 : _c.data) == null ? void 0 : _d.message) != null ? _g : (_f = (_e = e.response) == null ? void 0 : _e.data) == null ? void 0 : _f.error) != null ? _h : e.message;
   return [status, statusText, detail].filter((x) => x != null && x !== "").join(" ");
+}
+function delay(ms) {
+  return new Promise((resolve2) => setTimeout(resolve2, ms));
 }
 const httpKey = Symbol();
 const komfMetadataKey = Symbol();
@@ -22016,13 +22078,13 @@ function useTimeout() {
   onBeforeUnmount(removeTimeout);
   return {
     removeTimeout,
-    registerTimeout(fn, delay) {
+    registerTimeout(fn, delay2) {
       removeTimeout();
       if (vmIsDestroyed(vm) === false) {
         timer = setTimeout(() => {
           timer = null;
           fn();
-        }, delay);
+        }, delay2);
       }
     }
   };
@@ -26350,9 +26412,9 @@ const Screen = defineReactivePlugin({
         });
         this.__update(true);
       };
-      this.setDebounce = (delay) => {
+      this.setDebounce = (delay2) => {
         updateEvt !== void 0 && target2.removeEventListener("resize", updateEvt, passive);
-        updateEvt = delay > 0 ? debounce(this.__update, delay) : this.__update;
+        updateEvt = delay2 > 0 ? debounce(this.__update, delay2) : this.__update;
         target2.addEventListener("resize", updateEvt, passive);
       };
       this.setDebounce(updateDebounce);
@@ -39009,8 +39071,13 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
     });
     async function dialogConfirm() {
       loading.value = true;
-      await editMetadata();
-      onDialogOK();
+      try {
+        const success = await editMetadata();
+        if (success)
+          onDialogOK();
+      } finally {
+        loading.value = false;
+      }
     }
     async function searchSeries() {
       loading.value = true;
@@ -39036,13 +39103,16 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
           edition: edition.value == "" ? void 0 : edition.value
         };
         try {
-          await metadataService.identifySeries(request);
+          const jobId = await metadataService.identifySeries(request);
+          await metadataService.waitForJobCompletion(jobId);
+          return true;
         } catch (e) {
           errorNotification(e, $q);
           onDialogCancel();
-          return;
+          return false;
         }
       }
+      return false;
     }
     function selectResult(searchResult) {
       selectedResult.value = searchResult;
@@ -39253,8 +39323,8 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const IdentifySeriesDialog_vue_vue_type_style_index_0_scoped_a3e9113d_lang = "";
-const IdentifySeriesDialog = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["__scopeId", "data-v-a3e9113d"]]);
+const IdentifySeriesDialog_vue_vue_type_style_index_0_scoped_c545221e_lang = "";
+const IdentifySeriesDialog = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["__scopeId", "data-v-c545221e"]]);
 const _hoisted_1$1 = {
   class: "q-pa-md flex flex-center",
   style: { "background-color": "rgba(89, 89, 89, 0.5)" }
@@ -39322,11 +39392,13 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
     async function autoIdentify() {
       loading.value = true;
       try {
-        await metadataService.matchSeries(libraryId(), seriesId());
+        const jobId = await metadataService.matchSeries(libraryId(), seriesId());
+        await metadataService.waitForJobCompletion(jobId);
       } catch (e) {
         errorNotification(e, $q);
+      } finally {
+        loading.value = false;
       }
-      loading.value = false;
     }
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock(Fragment, null, [
@@ -39406,8 +39478,8 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const SeriesActionsMenu_vue_vue_type_style_index_0_scoped_34a2954d_lang = "";
-const SeriesActionsMenu = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["__scopeId", "data-v-34a2954d"]]);
+const SeriesActionsMenu_vue_vue_type_style_index_0_scoped_de6fdbd1_lang = "";
+const SeriesActionsMenu = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["__scopeId", "data-v-de6fdbd1"]]);
 const _sfc_main$7 = /* @__PURE__ */ defineComponent({
   __name: "KomgaSeriesActions",
   setup(__props) {
