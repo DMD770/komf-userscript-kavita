@@ -21355,8 +21355,8 @@ class KomfMetadataService {
     __publicField(this, "settings", useSettingsStore());
     this.http = http2;
   }
-  metadataUrls(path) {
-    const base = this.settings.komfUrl.replace(/\/+$/, "");
+  metadataUrls(path, baseUrl = this.settings.komfUrl) {
+    const base = baseUrl.replace(/\/+$/, "");
     const server = this.settings.mediaServer;
     return [
       `${base}/api/${server}/metadata${path}`,
@@ -21395,10 +21395,10 @@ class KomfMetadataService {
   }
   async searchSeries(seriesName, libraryId, seriesId) {
     try {
-      return (await this.http.get(`${this.settings.komfUrl}/${this.settings.mediaServer}/search`, {
+      return await this.getWithFallback("/search", {
         params: { name: seriesName, libraryId, seriesId },
         paramsSerializer: { indexes: null }
-      })).data;
+      });
     } catch (e) {
       let msg = "Failed to retrieve search results";
       if (axios$1.isAxiosError(e)) {
@@ -21409,7 +21409,7 @@ class KomfMetadataService {
   }
   async identifySeries(request) {
     try {
-      await this.http.post(`${this.settings.komfUrl}/${this.settings.mediaServer}/identify`, request);
+      await this.postWithFallback("/identify", request);
     } catch (e) {
       let msg = "Failed to identify series";
       if (axios$1.isAxiosError(e)) {
@@ -21421,9 +21421,7 @@ class KomfMetadataService {
   async matchLibrary(libraryId) {
     var _a2;
     try {
-      await this.http.post(
-        `${this.settings.komfUrl}/${this.settings.mediaServer}/match/library/${libraryId}`
-      );
+      await this.postWithFallback(`/match/library/${libraryId}`);
     } catch (e) {
       let msg = "Failed to match library";
       if (axios$1.isAxiosError(e)) {
@@ -21437,9 +21435,7 @@ class KomfMetadataService {
   }
   async matchSeries(libraryId, seriesId) {
     try {
-      await this.http.post(
-        `${this.settings.komfUrl}/${this.settings.mediaServer}/match/library/${libraryId}/series/${seriesId}`
-      );
+      await this.postWithFallback(`/match/library/${libraryId}/series/${seriesId}`);
     } catch (e) {
       let msg = "Failed to match series";
       if (axios$1.isAxiosError(e)) {
@@ -21450,9 +21446,7 @@ class KomfMetadataService {
   }
   async resetSeries(libraryId, seriesId) {
     try {
-      await this.http.post(
-        `${this.settings.komfUrl}/${this.settings.mediaServer}/reset/library/${libraryId}/series/${seriesId}`
-      );
+      await this.postWithFallback(`/reset/library/${libraryId}/series/${seriesId}`);
     } catch (e) {
       let msg = "Failed to reset series";
       if (axios$1.isAxiosError(e)) {
@@ -21463,9 +21457,7 @@ class KomfMetadataService {
   }
   async resetLibrary(libraryId) {
     try {
-      await this.http.post(
-        `${this.settings.komfUrl}/${this.settings.mediaServer}/reset/library/${libraryId}`
-      );
+      await this.postWithFallback(`/reset/library/${libraryId}`);
     } catch (e) {
       let msg = "Failed to reset library";
       if (axios$1.isAxiosError(e)) {
@@ -21556,9 +21548,24 @@ class KomfMetadataService {
     }
   }
   async checkConnection(url) {
+    var _a2;
     let data;
     try {
-      data = (await this.http.get(`${url}/${this.settings.mediaServer}/providers`)).data;
+      const urls = this.metadataUrls("/providers", url);
+      let lastError;
+      for (const target2 of urls) {
+        try {
+          data = (await this.http.get(target2)).data;
+          lastError = null;
+          break;
+        } catch (e) {
+          lastError = e;
+          if (!axios$1.isAxiosError(e) || ((_a2 = e.response) == null ? void 0 : _a2.status) !== 404)
+            throw e;
+        }
+      }
+      if (lastError)
+        throw lastError;
     } catch (e) {
       let msg = "Connection Failed";
       if (axios$1.isAxiosError(e)) {

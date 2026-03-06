@@ -18,8 +18,8 @@ export default class KomfMetadataService {
         this.http = http
     }
 
-    private metadataUrls(path: string): string[] {
-        const base = this.settings.komfUrl.replace(/\/+$/, '')
+    private metadataUrls(path: string, baseUrl: string = this.settings.komfUrl): string[] {
+        const base = baseUrl.replace(/\/+$/, '')
         const server = this.settings.mediaServer
         return [
             `${base}/api/${server}/metadata${path}`,
@@ -57,12 +57,10 @@ export default class KomfMetadataService {
 
     async searchSeries(seriesName: string, libraryId?: string, seriesId?: string): Promise<SearchResult[]> {
         try {
-            return (
-                await this.http.get(`${this.settings.komfUrl}/${this.settings.mediaServer}/search`, {
-                    params: { name: seriesName, libraryId: libraryId, seriesId: seriesId },
-                    paramsSerializer: { indexes: null }
-                })
-            ).data
+            return await this.getWithFallback<SearchResult[]>('/search', {
+                params: { name: seriesName, libraryId: libraryId, seriesId: seriesId },
+                paramsSerializer: { indexes: null }
+            })
         } catch (e: unknown) {
             let msg = 'Failed to retrieve search results'
 
@@ -75,7 +73,7 @@ export default class KomfMetadataService {
 
     async identifySeries(request: IdentifyRequest) {
         try {
-            await this.http.post(`${this.settings.komfUrl}/${this.settings.mediaServer}/identify`, request)
+            await this.postWithFallback('/identify', request)
         } catch (e) {
             let msg = 'Failed to identify series'
             if (axios.isAxiosError(e)) {
@@ -87,9 +85,7 @@ export default class KomfMetadataService {
 
     async matchLibrary(libraryId: string) {
         try {
-            await this.http.post(
-                `${this.settings.komfUrl}/${this.settings.mediaServer}/match/library/${libraryId}`
-            )
+            await this.postWithFallback(`/match/library/${libraryId}`)
         } catch (e) {
             let msg = 'Failed to match library'
             if (axios.isAxiosError(e)) {
@@ -102,9 +98,7 @@ export default class KomfMetadataService {
 
     async matchSeries(libraryId: string, seriesId: string) {
         try {
-            await this.http.post(
-                `${this.settings.komfUrl}/${this.settings.mediaServer}/match/library/${libraryId}/series/${seriesId}`
-            )
+            await this.postWithFallback(`/match/library/${libraryId}/series/${seriesId}`)
         } catch (e) {
             let msg = 'Failed to match series'
             if (axios.isAxiosError(e)) {
@@ -116,9 +110,7 @@ export default class KomfMetadataService {
 
     async resetSeries(libraryId: string, seriesId: string) {
         try {
-            await this.http.post(
-                `${this.settings.komfUrl}/${this.settings.mediaServer}/reset/library/${libraryId}/series/${seriesId}`
-            )
+            await this.postWithFallback(`/reset/library/${libraryId}/series/${seriesId}`)
         } catch (e) {
             let msg = 'Failed to reset series'
             if (axios.isAxiosError(e)) {
@@ -130,9 +122,7 @@ export default class KomfMetadataService {
 
     async resetLibrary(libraryId: string) {
         try {
-            await this.http.post(
-                `${this.settings.komfUrl}/${this.settings.mediaServer}/reset/library/${libraryId}`
-            )
+            await this.postWithFallback(`/reset/library/${libraryId}`)
         } catch (e) {
             let msg = 'Failed to reset library'
             if (axios.isAxiosError(e)) {
@@ -237,7 +227,19 @@ export default class KomfMetadataService {
     async checkConnection(url: string) {
         let data
         try {
-            data = (await this.http.get(`${url}/${this.settings.mediaServer}/providers`)).data
+            const urls = this.metadataUrls('/providers', url)
+            let lastError: unknown
+            for (const target of urls) {
+                try {
+                    data = (await this.http.get(target)).data
+                    lastError = null
+                    break
+                } catch (e) {
+                    lastError = e
+                    if (!axios.isAxiosError(e) || e.response?.status !== 404) throw e
+                }
+            }
+            if (lastError) throw lastError
         } catch (e) {
             let msg = 'Connection Failed'
             if (axios.isAxiosError(e)) {
