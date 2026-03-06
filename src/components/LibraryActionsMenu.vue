@@ -48,12 +48,26 @@ const metadataService = inject<KomfMetadataService>(komfMetadataKey) as KomfMeta
 const settings = useSettingsStore()
 
 function libraryId() {
-    let pathTokens = window.location.pathname.split('/')
-    if (settings.mediaServer == MediaServer.Komga) {
-        return pathTokens[pathTokens.findIndex(el => el == 'libraries') + 1]
-    } else {
-        return pathTokens[pathTokens.findIndex(el => el == 'library') + 1]
+    const pathname = window.location.pathname
+    const routeSegment = settings.mediaServer == MediaServer.Komga ? 'libraries' : 'library'
+    const routeMatch = pathname.match(new RegExp(`/${routeSegment}/([^/?#]+)`))
+    if (routeMatch?.[1]) return routeMatch[1]
+
+    const queryId = new URL(window.location.href).searchParams.get('libraryId')
+    if (queryId) return queryId
+
+    if (settings.mediaServer == MediaServer.Kavita) {
+        const activeHref = document
+            .querySelector('app-side-nav a.side-nav-item.active')
+            ?.getAttribute('href')
+        if (activeHref) {
+            const parts = activeHref.split('/')
+            const index = parts.findIndex((el) => el == 'library')
+            if (index >= 0 && parts[index + 1]) return parts[index + 1]
+        }
     }
+
+    throw new Error(`Unable to determine library id from URL: ${window.location.href}`)
 }
 
 async function autoIdentify() {

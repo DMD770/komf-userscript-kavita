@@ -185,7 +185,7 @@ export default class KomfMetadataService {
         } catch (e) {
             let msg = 'Failed to pause library run'
             if (axios.isAxiosError(e)) {
-                msg += `: ${e.message}`
+                msg += `: ${formatAxiosError(e)}`
             }
             throw new Error(msg)
         }
@@ -201,7 +201,7 @@ export default class KomfMetadataService {
         } catch (e) {
             let msg = 'Failed to resume library run'
             if (axios.isAxiosError(e)) {
-                msg += `: ${e.message}`
+                msg += `: ${formatAxiosError(e)}`
             }
             throw new Error(msg)
         }
@@ -215,7 +215,7 @@ export default class KomfMetadataService {
         } catch (e) {
             let msg = 'Failed to stop library run'
             if (axios.isAxiosError(e)) {
-                msg += `: ${e.message}`
+                msg += `: ${formatAxiosError(e)}`
             }
             throw new Error(msg)
         }
@@ -237,4 +237,11 @@ export default class KomfMetadataService {
             throw new Error('Connection Failed')
         }
     }
+}
+
+function formatAxiosError(e: any): string {
+    const status = e.response?.status
+    const statusText = e.response?.statusText
+    const detail = e.response?.data?.message ?? e.response?.data?.error ?? e.message
+    return [status, statusText, detail].filter((x) => x != null && x !== '').join(' ')
 }

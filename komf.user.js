@@ -12,6 +12,7 @@
 // @downloadURL  https://raw.githubusercontent.com/DMD770/komf-userscript-kavita/main/komf.user.js
 
 // ==/UserScript==
+
 (function(){"use strict";try{if(typeof document!="undefined"){var n=document.createElement("style");n.appendChild(document.createTextNode(`@charset "UTF-8";
 /* * Normalizing -- forked from Normalize.css v8
  * */
@@ -11306,74 +11307,74 @@ body.body--dark {
 [data-v-e95f9e5e] .col {
     flex: 10000 1 0;
 }
-}.row[data-v-f34f6abd] {
+}.row[data-v-3c166eb2] {
   margin: 0;
 }
-.col[data-v-f34f6abd], .col-auto[data-v-f34f6abd] {
+.col[data-v-3c166eb2], .col-auto[data-v-3c166eb2] {
   padding: 0;
 }
-.row + .row[data-v-f34f6abd] {
+.row + .row[data-v-3c166eb2] {
   margin: 0;
 }
-[data-v-f34f6abd] .q-checkbox>* {
+[data-v-3c166eb2] .q-checkbox>* {
   width: auto;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-f34f6abd] .q-tab__content>* {
+[data-v-3c166eb2] .q-tab__content>* {
   flex-shrink: unset;
 }
-[data-v-f34f6abd] .q-tabs>* {
+[data-v-3c166eb2] .q-tabs>* {
   width: auto;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-f34f6abd] .q-space {
+[data-v-3c166eb2] .q-space {
   width: auto;
 }
-[data-v-f34f6abd] .q-splitter {
+[data-v-3c166eb2] .q-splitter {
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-f34f6abd] .q-splitter>* {
+[data-v-3c166eb2] .q-splitter>* {
   width: 1px;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-f34f6abd] .row {
+[data-v-3c166eb2] .row {
   margin: 0;
   --bs-gutter-x: unset;
   --bs-gutter-y: unset;
 }
-[data-v-f34f6abd] .col {
+[data-v-3c166eb2] .col {
   padding: 0;
 }
-[data-v-f34f6abd] .row + .row {
+[data-v-3c166eb2] .row + .row {
   margin: 0;
 }
-.bg-dark[data-v-f34f6abd] {
+.bg-dark[data-v-3c166eb2] {
   background: unset;
 }
-[data-v-f34f6abd] input:not([type=range]) {
+[data-v-3c166eb2] input:not([type=range]) {
   background-color: unset;
   border-color: unset;
 }
-[data-v-f34f6abd] input:not([type=range]):focus {
+[data-v-3c166eb2] input:not([type=range]):focus {
   border-color: unset;
   background-color: unset;
   box-shadow: unset;
 }
-[data-v-f34f6abd] .hidden {
+[data-v-3c166eb2] .hidden {
   display: none !important;
 }
-[data-v-f34f6abd] .q-field__append {
+[data-v-3c166eb2] .q-field__append {
   width: auto;
 }
-[data-v-f34f6abd] .q-chip {
+[data-v-3c166eb2] .q-chip {
   width: auto;
 }
 @media (min-width: 0) {
-[data-v-f34f6abd] .col {
+[data-v-3c166eb2] .col {
     flex: 10000 1 0;
 }
 }.row[data-v-d80e76e9] {
@@ -21501,7 +21502,7 @@ class KomfMetadataService {
     } catch (e) {
       let msg = "Failed to pause library run";
       if (axios$1.isAxiosError(e)) {
-        msg += `: ${e.message}`;
+        msg += `: ${formatAxiosError(e)}`;
       }
       throw new Error(msg);
     }
@@ -21516,7 +21517,7 @@ class KomfMetadataService {
     } catch (e) {
       let msg = "Failed to resume library run";
       if (axios$1.isAxiosError(e)) {
-        msg += `: ${e.message}`;
+        msg += `: ${formatAxiosError(e)}`;
       }
       throw new Error(msg);
     }
@@ -21529,7 +21530,7 @@ class KomfMetadataService {
     } catch (e) {
       let msg = "Failed to stop library run";
       if (axios$1.isAxiosError(e)) {
-        msg += `: ${e.message}`;
+        msg += `: ${formatAxiosError(e)}`;
       }
       throw new Error(msg);
     }
@@ -21549,6 +21550,13 @@ class KomfMetadataService {
       throw new Error("Connection Failed");
     }
   }
+}
+function formatAxiosError(e) {
+  var _a2, _b, _c, _d, _e, _f, _g, _h;
+  const status = (_a2 = e.response) == null ? void 0 : _a2.status;
+  const statusText = (_b = e.response) == null ? void 0 : _b.statusText;
+  const detail = (_h = (_g = (_d = (_c = e.response) == null ? void 0 : _c.data) == null ? void 0 : _d.message) != null ? _g : (_f = (_e = e.response) == null ? void 0 : _e.data) == null ? void 0 : _f.error) != null ? _h : e.message;
+  return [status, statusText, detail].filter((x) => x != null && x !== "").join(" ");
 }
 const httpKey = Symbol();
 const komfMetadataKey = Symbol();
@@ -39400,12 +39408,25 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
     const metadataService = inject(komfMetadataKey);
     const settings = useSettingsStore();
     function libraryId() {
-      let pathTokens = window.location.pathname.split("/");
-      if (settings.mediaServer == MediaServer.Komga) {
-        return pathTokens[pathTokens.findIndex((el) => el == "libraries") + 1];
-      } else {
-        return pathTokens[pathTokens.findIndex((el) => el == "library") + 1];
+      var _a2;
+      const pathname = window.location.pathname;
+      const routeSegment = settings.mediaServer == MediaServer.Komga ? "libraries" : "library";
+      const routeMatch = pathname.match(new RegExp(`/${routeSegment}/([^/?#]+)`));
+      if (routeMatch == null ? void 0 : routeMatch[1])
+        return routeMatch[1];
+      const queryId = new URL(window.location.href).searchParams.get("libraryId");
+      if (queryId)
+        return queryId;
+      if (settings.mediaServer == MediaServer.Kavita) {
+        const activeHref = (_a2 = document.querySelector("app-side-nav a.side-nav-item.active")) == null ? void 0 : _a2.getAttribute("href");
+        if (activeHref) {
+          const parts = activeHref.split("/");
+          const index2 = parts.findIndex((el) => el == "library");
+          if (index2 >= 0 && parts[index2 + 1])
+            return parts[index2 + 1];
+        }
       }
+      throw new Error(`Unable to determine library id from URL: ${window.location.href}`);
     }
     async function autoIdentify() {
       try {
@@ -39839,8 +39860,8 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const LibraryActionsMenu_vue_vue_type_style_index_0_scoped_f34f6abd_lang = "";
-const LibraryActionsMenu = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-f34f6abd"]]);
+const LibraryActionsMenu_vue_vue_type_style_index_0_scoped_3c166eb2_lang = "";
+const LibraryActionsMenu = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-3c166eb2"]]);
 const _sfc_main$5 = /* @__PURE__ */ defineComponent({
   __name: "KomgaLibraryActions",
   setup(__props) {
@@ -40425,4 +40446,3 @@ app.provide(httpKey, http);
 app.provide(komfMetadataKey, komfMetadata);
 app.provide(komfConfigKey, komfConfig);
 app.mount(mountElement);
-
