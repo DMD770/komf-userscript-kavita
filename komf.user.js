@@ -21355,6 +21355,44 @@ class KomfMetadataService {
     __publicField(this, "settings", useSettingsStore());
     this.http = http2;
   }
+  metadataUrls(path) {
+    const base = this.settings.komfUrl.replace(/\/+$/, "");
+    const server = this.settings.mediaServer;
+    return [
+      `${base}/api/${server}/metadata${path}`,
+      `${base}/${server}${path}`
+    ];
+  }
+  async getWithFallback(path, config) {
+    var _a2;
+    const urls = this.metadataUrls(path);
+    let lastError;
+    for (const url of urls) {
+      try {
+        return (await this.http.get(url, config)).data;
+      } catch (e) {
+        lastError = e;
+        if (!axios$1.isAxiosError(e) || ((_a2 = e.response) == null ? void 0 : _a2.status) !== 404)
+          throw e;
+      }
+    }
+    throw lastError;
+  }
+  async postWithFallback(path, data, config) {
+    var _a2;
+    const urls = this.metadataUrls(path);
+    let lastError;
+    for (const url of urls) {
+      try {
+        return await this.http.post(url, data, config);
+      } catch (e) {
+        lastError = e;
+        if (!axios$1.isAxiosError(e) || ((_a2 = e.response) == null ? void 0 : _a2.status) !== 404)
+          throw e;
+      }
+    }
+    throw lastError;
+  }
   async searchSeries(seriesName, libraryId, seriesId) {
     try {
       return (await this.http.get(`${this.settings.komfUrl}/${this.settings.mediaServer}/search`, {
@@ -21438,9 +21476,7 @@ class KomfMetadataService {
   }
   async getSkippedSeries(libraryId) {
     try {
-      return (await this.http.get(
-        `${this.settings.komfUrl}/${this.settings.mediaServer}/skipped/library/${libraryId}`
-      )).data;
+      return await this.getWithFallback(`/skipped/library/${libraryId}`);
     } catch (e) {
       let msg = "Failed to get skipped series";
       if (axios$1.isAxiosError(e)) {
@@ -21451,11 +21487,7 @@ class KomfMetadataService {
   }
   async retrySkippedSeries(libraryId, dryRun = false) {
     try {
-      return (await this.http.post(
-        `${this.settings.komfUrl}/${this.settings.mediaServer}/retry-skipped/library/${libraryId}`,
-        void 0,
-        { params: { dryRun } }
-      )).data;
+      return (await this.postWithFallback(`/retry-skipped/library/${libraryId}`, void 0, { params: { dryRun } })).data;
     } catch (e) {
       let msg = "Failed to retry skipped series";
       if (axios$1.isAxiosError(e)) {
@@ -21467,9 +21499,7 @@ class KomfMetadataService {
   async latestLibrarySummary(libraryId) {
     var _a2;
     try {
-      return (await this.http.get(
-        `${this.settings.komfUrl}/${this.settings.mediaServer}/summary/library/${libraryId}/latest`
-      )).data;
+      return await this.getWithFallback(`/summary/library/${libraryId}/latest`);
     } catch (e) {
       if (axios$1.isAxiosError(e) && ((_a2 = e.response) == null ? void 0 : _a2.status) == 404) {
         return null;
@@ -21483,9 +21513,7 @@ class KomfMetadataService {
   }
   async libraryRunControlStatus(libraryId) {
     try {
-      return (await this.http.get(
-        `${this.settings.komfUrl}/${this.settings.mediaServer}/control/library/${libraryId}/status`
-      )).data;
+      return await this.getWithFallback(`/control/library/${libraryId}/status`);
     } catch (e) {
       let msg = "Failed to get library run status";
       if (axios$1.isAxiosError(e)) {
@@ -21496,9 +21524,7 @@ class KomfMetadataService {
   }
   async pauseLibraryRun(libraryId) {
     try {
-      await this.http.post(
-        `${this.settings.komfUrl}/${this.settings.mediaServer}/control/library/${libraryId}/pause`
-      );
+      await this.postWithFallback(`/control/library/${libraryId}/pause`);
     } catch (e) {
       let msg = "Failed to pause library run";
       if (axios$1.isAxiosError(e)) {
@@ -21509,11 +21535,7 @@ class KomfMetadataService {
   }
   async resumeLibraryRun(libraryId, mode = "CONTINUE") {
     try {
-      await this.http.post(
-        `${this.settings.komfUrl}/${this.settings.mediaServer}/control/library/${libraryId}/resume`,
-        void 0,
-        { params: { mode } }
-      );
+      await this.postWithFallback(`/control/library/${libraryId}/resume`, void 0, { params: { mode } });
     } catch (e) {
       let msg = "Failed to resume library run";
       if (axios$1.isAxiosError(e)) {
@@ -21524,9 +21546,7 @@ class KomfMetadataService {
   }
   async stopLibraryRun(libraryId) {
     try {
-      await this.http.post(
-        `${this.settings.komfUrl}/${this.settings.mediaServer}/control/library/${libraryId}/stop`
-      );
+      await this.postWithFallback(`/control/library/${libraryId}/stop`);
     } catch (e) {
       let msg = "Failed to stop library run";
       if (axios$1.isAxiosError(e)) {
