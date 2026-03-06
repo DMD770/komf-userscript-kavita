@@ -6,6 +6,7 @@ import type {
     LibraryRunSummary,
     MetadataJob,
     MetadataJobResponse,
+    MetadataJobWaitResult,
     RetrySkippedSeriesResponse,
     SearchResult,
     SkippedSeriesEntry
@@ -158,17 +159,25 @@ export default class KomfMetadataService {
         }
     }
 
-    async waitForJobCompletion(jobId: string, timeoutMs: number = 10 * 60 * 1000): Promise<MetadataJob> {
+    async waitForJobCompletionOrBackground(
+        jobId: string,
+        timeoutMs: number = 90 * 1000
+    ): Promise<MetadataJobWaitResult> {
         const startedAt = Date.now()
+        let lastJob: MetadataJob | null = null
         while (Date.now() - startedAt < timeoutMs) {
             const job = await this.getJob(jobId)
-            if (job.status == 'COMPLETED') return job
+            lastJob = job
+            if (job.status == 'COMPLETED') return { job, completed: true }
             if (job.status == 'FAILED') {
                 throw new Error(job.message ? `Job failed: ${job.message}` : 'Job failed')
             }
             await delay(1000)
         }
-        throw new Error(`Timed out waiting for job ${jobId} to complete`)
+        return {
+            job: lastJob ?? { id: jobId, status: 'RUNNING', message: null },
+            completed: false
+        }
     }
 
     async resetSeries(libraryId: string, seriesId: string) {

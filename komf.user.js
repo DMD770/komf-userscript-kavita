@@ -11096,144 +11096,144 @@ body.body--dark {
 }
 .item-border[data-v-452f1499] {
   border: 3px solid #FEC000;
-}.row[data-v-c545221e] {
+}.row[data-v-a496c0e5] {
   margin: 0;
 }
-.col[data-v-c545221e], .col-auto[data-v-c545221e] {
+.col[data-v-a496c0e5], .col-auto[data-v-a496c0e5] {
   padding: 0;
 }
-.row + .row[data-v-c545221e] {
+.row + .row[data-v-a496c0e5] {
   margin: 0;
 }
-[data-v-c545221e] .q-checkbox>* {
+[data-v-a496c0e5] .q-checkbox>* {
   width: auto;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-c545221e] .q-tab__content>* {
+[data-v-a496c0e5] .q-tab__content>* {
   flex-shrink: unset;
 }
-[data-v-c545221e] .q-tabs>* {
+[data-v-a496c0e5] .q-tabs>* {
   width: auto;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-c545221e] .q-space {
+[data-v-a496c0e5] .q-space {
   width: auto;
 }
-[data-v-c545221e] .q-splitter {
+[data-v-a496c0e5] .q-splitter {
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-c545221e] .q-splitter>* {
+[data-v-a496c0e5] .q-splitter>* {
   width: 1px;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-c545221e] .row {
+[data-v-a496c0e5] .row {
   margin: 0;
   --bs-gutter-x: unset;
   --bs-gutter-y: unset;
 }
-[data-v-c545221e] .col {
+[data-v-a496c0e5] .col {
   padding: 0;
 }
-[data-v-c545221e] .row + .row {
+[data-v-a496c0e5] .row + .row {
   margin: 0;
 }
-.bg-dark[data-v-c545221e] {
+.bg-dark[data-v-a496c0e5] {
   background: unset;
 }
-[data-v-c545221e] input:not([type=range]) {
+[data-v-a496c0e5] input:not([type=range]) {
   background-color: unset;
   border-color: unset;
 }
-[data-v-c545221e] input:not([type=range]):focus {
+[data-v-a496c0e5] input:not([type=range]):focus {
   border-color: unset;
   background-color: unset;
   box-shadow: unset;
 }
-[data-v-c545221e] .hidden {
+[data-v-a496c0e5] .hidden {
   display: none !important;
 }
-[data-v-c545221e] .q-field__append {
+[data-v-a496c0e5] .q-field__append {
   width: auto;
 }
-[data-v-c545221e] .q-chip {
+[data-v-a496c0e5] .q-chip {
   width: auto;
 }
 @media (min-width: 0) {
-[data-v-c545221e] .col {
+[data-v-a496c0e5] .col {
     flex: 10000 1 0;
 }
-}.row[data-v-de6fdbd1] {
+}.row[data-v-0fe28eba] {
   margin: 0;
 }
-.col[data-v-de6fdbd1], .col-auto[data-v-de6fdbd1] {
+.col[data-v-0fe28eba], .col-auto[data-v-0fe28eba] {
   padding: 0;
 }
-.row + .row[data-v-de6fdbd1] {
+.row + .row[data-v-0fe28eba] {
   margin: 0;
 }
-[data-v-de6fdbd1] .q-checkbox>* {
+[data-v-0fe28eba] .q-checkbox>* {
   width: auto;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-de6fdbd1] .q-tab__content>* {
+[data-v-0fe28eba] .q-tab__content>* {
   flex-shrink: unset;
 }
-[data-v-de6fdbd1] .q-tabs>* {
+[data-v-0fe28eba] .q-tabs>* {
   width: auto;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-de6fdbd1] .q-space {
+[data-v-0fe28eba] .q-space {
   width: auto;
 }
-[data-v-de6fdbd1] .q-splitter {
+[data-v-0fe28eba] .q-splitter {
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-de6fdbd1] .q-splitter>* {
+[data-v-0fe28eba] .q-splitter>* {
   width: 1px;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-de6fdbd1] .row {
+[data-v-0fe28eba] .row {
   margin: 0;
   --bs-gutter-x: unset;
   --bs-gutter-y: unset;
 }
-[data-v-de6fdbd1] .col {
+[data-v-0fe28eba] .col {
   padding: 0;
 }
-[data-v-de6fdbd1] .row + .row {
+[data-v-0fe28eba] .row + .row {
   margin: 0;
 }
-.bg-dark[data-v-de6fdbd1] {
+.bg-dark[data-v-0fe28eba] {
   background: unset;
 }
-[data-v-de6fdbd1] input:not([type=range]) {
+[data-v-0fe28eba] input:not([type=range]) {
   background-color: unset;
   border-color: unset;
 }
-[data-v-de6fdbd1] input:not([type=range]):focus {
+[data-v-0fe28eba] input:not([type=range]):focus {
   border-color: unset;
   background-color: unset;
   box-shadow: unset;
 }
-[data-v-de6fdbd1] .hidden {
+[data-v-0fe28eba] .hidden {
   display: none !important;
 }
-[data-v-de6fdbd1] .q-field__append {
+[data-v-0fe28eba] .q-field__append {
   width: auto;
 }
-[data-v-de6fdbd1] .q-chip {
+[data-v-0fe28eba] .q-chip {
   width: auto;
 }
 @media (min-width: 0) {
-[data-v-de6fdbd1] .col {
+[data-v-0fe28eba] .col {
     flex: 10000 1 0;
 }
 }.row[data-v-e95f9e5e] {
@@ -21490,18 +21490,23 @@ class KomfMetadataService {
       throw new Error(msg);
     }
   }
-  async waitForJobCompletion(jobId, timeoutMs = 10 * 60 * 1e3) {
+  async waitForJobCompletionOrBackground(jobId, timeoutMs = 90 * 1e3) {
     const startedAt = Date.now();
+    let lastJob = null;
     while (Date.now() - startedAt < timeoutMs) {
       const job = await this.getJob(jobId);
+      lastJob = job;
       if (job.status == "COMPLETED")
-        return job;
+        return { job, completed: true };
       if (job.status == "FAILED") {
         throw new Error(job.message ? `Job failed: ${job.message}` : "Job failed");
       }
       await delay(1e3);
     }
-    throw new Error(`Timed out waiting for job ${jobId} to complete`);
+    return {
+      job: lastJob != null ? lastJob : { id: jobId, status: "RUNNING", message: null },
+      completed: false
+    };
   }
   async resetSeries(libraryId, seriesId) {
     try {
@@ -39104,7 +39109,15 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
         };
         try {
           const jobId = await metadataService.identifySeries(request);
-          await metadataService.waitForJobCompletion(jobId);
+          const waitResult = await metadataService.waitForJobCompletionOrBackground(jobId);
+          if (!waitResult.completed) {
+            $q.notify({
+              message: "Processing continues in background. You can close this dialog.",
+              color: "warning",
+              closeBtn: true,
+              timeout: 6e3
+            });
+          }
           return true;
         } catch (e) {
           errorNotification(e, $q);
@@ -39323,8 +39336,8 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const IdentifySeriesDialog_vue_vue_type_style_index_0_scoped_c545221e_lang = "";
-const IdentifySeriesDialog = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["__scopeId", "data-v-c545221e"]]);
+const IdentifySeriesDialog_vue_vue_type_style_index_0_scoped_a496c0e5_lang = "";
+const IdentifySeriesDialog = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["__scopeId", "data-v-a496c0e5"]]);
 const _hoisted_1$1 = {
   class: "q-pa-md flex flex-center",
   style: { "background-color": "rgba(89, 89, 89, 0.5)" }
@@ -39393,7 +39406,15 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
       loading.value = true;
       try {
         const jobId = await metadataService.matchSeries(libraryId(), seriesId());
-        await metadataService.waitForJobCompletion(jobId);
+        const waitResult = await metadataService.waitForJobCompletionOrBackground(jobId);
+        if (!waitResult.completed) {
+          $q.notify({
+            message: "Processing continues in background. Refresh or check later for final updates.",
+            color: "warning",
+            closeBtn: true,
+            timeout: 6e3
+          });
+        }
       } catch (e) {
         errorNotification(e, $q);
       } finally {
@@ -39478,8 +39499,8 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const SeriesActionsMenu_vue_vue_type_style_index_0_scoped_de6fdbd1_lang = "";
-const SeriesActionsMenu = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["__scopeId", "data-v-de6fdbd1"]]);
+const SeriesActionsMenu_vue_vue_type_style_index_0_scoped_0fe28eba_lang = "";
+const SeriesActionsMenu = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["__scopeId", "data-v-0fe28eba"]]);
 const _sfc_main$7 = /* @__PURE__ */ defineComponent({
   __name: "KomgaSeriesActions",
   setup(__props) {

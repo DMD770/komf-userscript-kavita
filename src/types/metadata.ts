@@ -74,3 +74,8 @@ export interface MetadataJob {
     status: MetadataJobStatus,
     message?: string | null,
 }
+
+export interface MetadataJobWaitResult {
+    job: MetadataJob,
+    completed: boolean,
+}
