@@ -21348,7 +21348,7 @@ const useSettingsStore = defineStore("settings", () => {
   const mediaServer = ref();
   return { komfUrl, mediaServer };
 });
-class KomfMetadataService {
+const _KomfMetadataService = class {
   constructor(http2) {
     __publicField(this, "http");
     __publicField(this, "settings", useSettingsStore());
@@ -21501,7 +21501,7 @@ class KomfMetadataService {
       if (job.status == "FAILED") {
         throw new Error(job.message ? `Job failed: ${job.message}` : "Job failed");
       }
-      await delay(1e3);
+      await delay(_KomfMetadataService.JOB_POLL_INTERVAL_MS);
     }
     return {
       job: lastJob != null ? lastJob : { id: jobId, status: "RUNNING", message: null },
@@ -21641,7 +21641,9 @@ class KomfMetadataService {
       throw new Error("Connection Failed");
     }
   }
-}
+};
+let KomfMetadataService = _KomfMetadataService;
+__publicField(KomfMetadataService, "JOB_POLL_INTERVAL_MS", 5e3);
 function formatAxiosError(e) {
   var _a2, _b, _c, _d, _e, _f, _g, _h;
   const status = (_a2 = e.response) == null ? void 0 : _a2.status;

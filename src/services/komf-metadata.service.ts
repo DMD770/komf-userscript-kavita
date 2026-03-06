@@ -14,6 +14,7 @@ import type {
 import { useSettingsStore } from '@/stores/settings'
 
 export default class KomfMetadataService {
+    private static readonly JOB_POLL_INTERVAL_MS = 5000
     private http: AxiosInstance
     private settings = useSettingsStore()
 
@@ -172,7 +173,7 @@ export default class KomfMetadataService {
             if (job.status == 'FAILED') {
                 throw new Error(job.message ? `Job failed: ${job.message}` : 'Job failed')
             }
-            await delay(1000)
+            await delay(KomfMetadataService.JOB_POLL_INTERVAL_MS)
         }
         return {
             job: lastJob ?? { id: jobId, status: 'RUNNING', message: null },
