@@ -31,6 +31,15 @@ export default class KomfMetadataService {
         ]
     }
 
+    private metadataUrlsLegacyFirst(path: string, baseUrl: string = this.settings.komfUrl): string[] {
+        const base = baseUrl.replace(/\/+$/, '')
+        const server = this.settings.mediaServer
+        return [
+            `${base}/${server}${path}`,
+            `${base}/api/${server}/metadata${path}`
+        ]
+    }
+
     private jobUrls(path: string, baseUrl: string = this.settings.komfUrl): string[] {
         const base = baseUrl.replace(/\/+$/, '')
         return [
@@ -55,6 +64,20 @@ export default class KomfMetadataService {
 
     private async postWithFallback(path: string, data?: any, config?: any): Promise<any> {
         const urls = this.metadataUrls(path)
+        let lastError: unknown
+        for (const url of urls) {
+            try {
+                return await this.http.post(url, data, config)
+            } catch (e) {
+                lastError = e
+                if (!axios.isAxiosError(e) || e.response?.status !== 404) throw e
+            }
+        }
+        throw lastError
+    }
+
+    private async postLegacyFirstWithFallback(path: string, data?: any, config?: any): Promise<any> {
+        const urls = this.metadataUrlsLegacyFirst(path)
         let lastError: unknown
         for (const url of urls) {
             try {
@@ -97,13 +120,11 @@ export default class KomfMetadataService {
         }
     }
 
-    async identifySeries(request: IdentifyRequest) {
+    async identifySeries(request: IdentifyRequest): Promise<string | null> {
         try {
-            const response = await this.postWithFallback('/identify', request)
+            const response = await this.postLegacyFirstWithFallback('/identify', request)
             const data = response.data as MetadataJobResponse
-            if (!data?.jobId) {
-                throw new Error('Missing jobId in response')
-            }
+            if (!data?.jobId) return null
             return data.jobId
         } catch (e) {
             let msg = 'Failed to identify series'
@@ -129,13 +150,11 @@ export default class KomfMetadataService {
         }
     }
 
-    async matchSeries(libraryId: string, seriesId: string): Promise<string> {
+    async matchSeries(libraryId: string, seriesId: string): Promise<string | null> {
         try {
-            const response = await this.postWithFallback(`/match/library/${libraryId}/series/${seriesId}`)
+            const response = await this.postLegacyFirstWithFallback(`/match/library/${libraryId}/series/${seriesId}`)
             const data = response.data as MetadataJobResponse
-            if (!data?.jobId) {
-                throw new Error('Missing jobId in response')
-            }
+            if (!data?.jobId) return null
             return data.jobId
         } catch (e) {
             let msg = 'Failed to match series'

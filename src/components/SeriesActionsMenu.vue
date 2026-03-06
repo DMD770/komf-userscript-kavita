@@ -105,14 +105,16 @@ async function autoIdentify() {
     loading.value = true
     try {
         const jobId = await metadataService.matchSeries(libraryId(), seriesId())
-        const waitResult = await metadataService.waitForJobCompletionOrBackground(jobId)
-        if (!waitResult.completed) {
-            $q.notify({
-                message: 'Processing continues in background. Refresh or check later for final updates.',
-                color: 'warning',
-                closeBtn: true,
-                timeout: 6000
-            })
+        if (jobId) {
+            const waitResult = await metadataService.waitForJobCompletionOrBackground(jobId)
+            if (!waitResult.completed) {
+                $q.notify({
+                    message: 'Processing continues in background. Refresh or check later for final updates.',
+                    color: 'warning',
+                    closeBtn: true,
+                    timeout: 6000
+                })
+            }
         }
     } catch (e) {
         errorNotification(e, $q)

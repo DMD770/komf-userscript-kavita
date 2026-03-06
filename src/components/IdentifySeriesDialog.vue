@@ -163,14 +163,16 @@ async function editMetadata() {
 
         try {
             const jobId = await metadataService.identifySeries(request)
-            const waitResult = await metadataService.waitForJobCompletionOrBackground(jobId)
-            if (!waitResult.completed) {
-                $q.notify({
-                    message: 'Processing continues in background. You can close this dialog.',
-                    color: 'warning',
-                    closeBtn: true,
-                    timeout: 6000
-                })
+            if (jobId) {
+                const waitResult = await metadataService.waitForJobCompletionOrBackground(jobId)
+                if (!waitResult.completed) {
+                    $q.notify({
+                        message: 'Processing continues in background. You can close this dialog.',
+                        color: 'warning',
+                        closeBtn: true,
+                        timeout: 6000
+                    })
+                }
             }
             return true
         } catch (e) {

@@ -11096,144 +11096,144 @@ body.body--dark {
 }
 .item-border[data-v-452f1499] {
   border: 3px solid #FEC000;
-}.row[data-v-a496c0e5] {
+}.row[data-v-791dfeef] {
   margin: 0;
 }
-.col[data-v-a496c0e5], .col-auto[data-v-a496c0e5] {
+.col[data-v-791dfeef], .col-auto[data-v-791dfeef] {
   padding: 0;
 }
-.row + .row[data-v-a496c0e5] {
+.row + .row[data-v-791dfeef] {
   margin: 0;
 }
-[data-v-a496c0e5] .q-checkbox>* {
+[data-v-791dfeef] .q-checkbox>* {
   width: auto;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-a496c0e5] .q-tab__content>* {
+[data-v-791dfeef] .q-tab__content>* {
   flex-shrink: unset;
 }
-[data-v-a496c0e5] .q-tabs>* {
+[data-v-791dfeef] .q-tabs>* {
   width: auto;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-a496c0e5] .q-space {
+[data-v-791dfeef] .q-space {
   width: auto;
 }
-[data-v-a496c0e5] .q-splitter {
+[data-v-791dfeef] .q-splitter {
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-a496c0e5] .q-splitter>* {
+[data-v-791dfeef] .q-splitter>* {
   width: 1px;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-a496c0e5] .row {
+[data-v-791dfeef] .row {
   margin: 0;
   --bs-gutter-x: unset;
   --bs-gutter-y: unset;
 }
-[data-v-a496c0e5] .col {
+[data-v-791dfeef] .col {
   padding: 0;
 }
-[data-v-a496c0e5] .row + .row {
+[data-v-791dfeef] .row + .row {
   margin: 0;
 }
-.bg-dark[data-v-a496c0e5] {
+.bg-dark[data-v-791dfeef] {
   background: unset;
 }
-[data-v-a496c0e5] input:not([type=range]) {
+[data-v-791dfeef] input:not([type=range]) {
   background-color: unset;
   border-color: unset;
 }
-[data-v-a496c0e5] input:not([type=range]):focus {
+[data-v-791dfeef] input:not([type=range]):focus {
   border-color: unset;
   background-color: unset;
   box-shadow: unset;
 }
-[data-v-a496c0e5] .hidden {
+[data-v-791dfeef] .hidden {
   display: none !important;
 }
-[data-v-a496c0e5] .q-field__append {
+[data-v-791dfeef] .q-field__append {
   width: auto;
 }
-[data-v-a496c0e5] .q-chip {
+[data-v-791dfeef] .q-chip {
   width: auto;
 }
 @media (min-width: 0) {
-[data-v-a496c0e5] .col {
+[data-v-791dfeef] .col {
     flex: 10000 1 0;
 }
-}.row[data-v-0fe28eba] {
+}.row[data-v-7ced52a2] {
   margin: 0;
 }
-.col[data-v-0fe28eba], .col-auto[data-v-0fe28eba] {
+.col[data-v-7ced52a2], .col-auto[data-v-7ced52a2] {
   padding: 0;
 }
-.row + .row[data-v-0fe28eba] {
+.row + .row[data-v-7ced52a2] {
   margin: 0;
 }
-[data-v-0fe28eba] .q-checkbox>* {
+[data-v-7ced52a2] .q-checkbox>* {
   width: auto;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-0fe28eba] .q-tab__content>* {
+[data-v-7ced52a2] .q-tab__content>* {
   flex-shrink: unset;
 }
-[data-v-0fe28eba] .q-tabs>* {
+[data-v-7ced52a2] .q-tabs>* {
   width: auto;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-0fe28eba] .q-space {
+[data-v-7ced52a2] .q-space {
   width: auto;
 }
-[data-v-0fe28eba] .q-splitter {
+[data-v-7ced52a2] .q-splitter {
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-0fe28eba] .q-splitter>* {
+[data-v-7ced52a2] .q-splitter>* {
   width: 1px;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-0fe28eba] .row {
+[data-v-7ced52a2] .row {
   margin: 0;
   --bs-gutter-x: unset;
   --bs-gutter-y: unset;
 }
-[data-v-0fe28eba] .col {
+[data-v-7ced52a2] .col {
   padding: 0;
 }
-[data-v-0fe28eba] .row + .row {
+[data-v-7ced52a2] .row + .row {
   margin: 0;
 }
-.bg-dark[data-v-0fe28eba] {
+.bg-dark[data-v-7ced52a2] {
   background: unset;
 }
-[data-v-0fe28eba] input:not([type=range]) {
+[data-v-7ced52a2] input:not([type=range]) {
   background-color: unset;
   border-color: unset;
 }
-[data-v-0fe28eba] input:not([type=range]):focus {
+[data-v-7ced52a2] input:not([type=range]):focus {
   border-color: unset;
   background-color: unset;
   box-shadow: unset;
 }
-[data-v-0fe28eba] .hidden {
+[data-v-7ced52a2] .hidden {
   display: none !important;
 }
-[data-v-0fe28eba] .q-field__append {
+[data-v-7ced52a2] .q-field__append {
   width: auto;
 }
-[data-v-0fe28eba] .q-chip {
+[data-v-7ced52a2] .q-chip {
   width: auto;
 }
 @media (min-width: 0) {
-[data-v-0fe28eba] .col {
+[data-v-7ced52a2] .col {
     flex: 10000 1 0;
 }
 }.row[data-v-e95f9e5e] {
@@ -21362,6 +21362,14 @@ const _KomfMetadataService = class {
       `${base}/${server}${path}`
     ];
   }
+  metadataUrlsLegacyFirst(path, baseUrl = this.settings.komfUrl) {
+    const base = baseUrl.replace(/\/+$/, "");
+    const server = this.settings.mediaServer;
+    return [
+      `${base}/${server}${path}`,
+      `${base}/api/${server}/metadata${path}`
+    ];
+  }
   jobUrls(path, baseUrl = this.settings.komfUrl) {
     const base = baseUrl.replace(/\/+$/, "");
     return [
@@ -21387,6 +21395,21 @@ const _KomfMetadataService = class {
   async postWithFallback(path, data, config) {
     var _a2;
     const urls = this.metadataUrls(path);
+    let lastError;
+    for (const url of urls) {
+      try {
+        return await this.http.post(url, data, config);
+      } catch (e) {
+        lastError = e;
+        if (!axios$1.isAxiosError(e) || ((_a2 = e.response) == null ? void 0 : _a2.status) !== 404)
+          throw e;
+      }
+    }
+    throw lastError;
+  }
+  async postLegacyFirstWithFallback(path, data, config) {
+    var _a2;
+    const urls = this.metadataUrlsLegacyFirst(path);
     let lastError;
     for (const url of urls) {
       try {
@@ -21430,11 +21453,10 @@ const _KomfMetadataService = class {
   }
   async identifySeries(request) {
     try {
-      const response = await this.postWithFallback("/identify", request);
+      const response = await this.postLegacyFirstWithFallback("/identify", request);
       const data = response.data;
-      if (!(data == null ? void 0 : data.jobId)) {
-        throw new Error("Missing jobId in response");
-      }
+      if (!(data == null ? void 0 : data.jobId))
+        return null;
       return data.jobId;
     } catch (e) {
       let msg = "Failed to identify series";
@@ -21463,11 +21485,10 @@ const _KomfMetadataService = class {
   }
   async matchSeries(libraryId, seriesId) {
     try {
-      const response = await this.postWithFallback(`/match/library/${libraryId}/series/${seriesId}`);
+      const response = await this.postLegacyFirstWithFallback(`/match/library/${libraryId}/series/${seriesId}`);
       const data = response.data;
-      if (!(data == null ? void 0 : data.jobId)) {
-        throw new Error("Missing jobId in response");
-      }
+      if (!(data == null ? void 0 : data.jobId))
+        return null;
       return data.jobId;
     } catch (e) {
       let msg = "Failed to match series";
@@ -39111,14 +39132,16 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
         };
         try {
           const jobId = await metadataService.identifySeries(request);
-          const waitResult = await metadataService.waitForJobCompletionOrBackground(jobId);
-          if (!waitResult.completed) {
-            $q.notify({
-              message: "Processing continues in background. You can close this dialog.",
-              color: "warning",
-              closeBtn: true,
-              timeout: 6e3
-            });
+          if (jobId) {
+            const waitResult = await metadataService.waitForJobCompletionOrBackground(jobId);
+            if (!waitResult.completed) {
+              $q.notify({
+                message: "Processing continues in background. You can close this dialog.",
+                color: "warning",
+                closeBtn: true,
+                timeout: 6e3
+              });
+            }
           }
           return true;
         } catch (e) {
@@ -39338,8 +39361,8 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const IdentifySeriesDialog_vue_vue_type_style_index_0_scoped_a496c0e5_lang = "";
-const IdentifySeriesDialog = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["__scopeId", "data-v-a496c0e5"]]);
+const IdentifySeriesDialog_vue_vue_type_style_index_0_scoped_791dfeef_lang = "";
+const IdentifySeriesDialog = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["__scopeId", "data-v-791dfeef"]]);
 const _hoisted_1$1 = {
   class: "q-pa-md flex flex-center",
   style: { "background-color": "rgba(89, 89, 89, 0.5)" }
@@ -39408,14 +39431,16 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
       loading.value = true;
       try {
         const jobId = await metadataService.matchSeries(libraryId(), seriesId());
-        const waitResult = await metadataService.waitForJobCompletionOrBackground(jobId);
-        if (!waitResult.completed) {
-          $q.notify({
-            message: "Processing continues in background. Refresh or check later for final updates.",
-            color: "warning",
-            closeBtn: true,
-            timeout: 6e3
-          });
+        if (jobId) {
+          const waitResult = await metadataService.waitForJobCompletionOrBackground(jobId);
+          if (!waitResult.completed) {
+            $q.notify({
+              message: "Processing continues in background. Refresh or check later for final updates.",
+              color: "warning",
+              closeBtn: true,
+              timeout: 6e3
+            });
+          }
         }
       } catch (e) {
         errorNotification(e, $q);
@@ -39501,8 +39526,8 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const SeriesActionsMenu_vue_vue_type_style_index_0_scoped_0fe28eba_lang = "";
-const SeriesActionsMenu = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["__scopeId", "data-v-0fe28eba"]]);
+const SeriesActionsMenu_vue_vue_type_style_index_0_scoped_7ced52a2_lang = "";
+const SeriesActionsMenu = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["__scopeId", "data-v-7ced52a2"]]);
 const _sfc_main$7 = /* @__PURE__ */ defineComponent({
   __name: "KomgaSeriesActions",
   setup(__props) {
