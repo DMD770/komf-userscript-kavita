@@ -1,6 +1,7 @@
 import axios, { type AxiosInstance } from 'axios'
 import type {
     IdentifyRequest,
+    LibraryApplyMode,
     LibraryRunControlStatus,
     LibraryRunResumeMode,
     LibraryRunSummary,
@@ -137,9 +138,9 @@ export default class KomfMetadataService {
         }
     }
 
-    async matchLibrary(libraryId: string) {
+    async matchLibrary(libraryId: string, applyMode: LibraryApplyMode = 'CORE') {
         try {
-            await this.postWithFallback(`/match/library/${libraryId}`)
+            await this.postWithFallback(`/match/library/${libraryId}`, undefined, { params: { applyMode } })
         } catch (e) {
             let msg = 'Failed to match library'
             if (axios.isAxiosError(e)) {
@@ -150,9 +151,17 @@ export default class KomfMetadataService {
         }
     }
 
-    async matchSeries(libraryId: string, seriesId: string): Promise<string | null> {
+    async matchSeries(
+        libraryId: string,
+        seriesId: string,
+        applyMode: LibraryApplyMode = 'CORE'
+    ): Promise<string | null> {
         try {
-            const response = await this.postLegacyFirstWithFallback(`/match/library/${libraryId}/series/${seriesId}`)
+            const response = await this.postLegacyFirstWithFallback(
+                `/match/library/${libraryId}/series/${seriesId}`,
+                undefined,
+                { params: { applyMode } }
+            )
             const data = response.data as MetadataJobResponse
             if (!data?.jobId) return null
             return data.jobId

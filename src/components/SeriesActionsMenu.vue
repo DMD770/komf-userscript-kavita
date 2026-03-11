@@ -3,8 +3,11 @@
     <q-item clickable @click="promptIdentifySeries" v-close-popup>
       <q-item-section no-wrap>Identify</q-item-section>
     </q-item>
-    <q-item clickable @click="autoIdentify" v-close-popup>
-      <q-item-section no-wrap>Auto-Identify</q-item-section>
+    <q-item clickable @click="autoIdentifyCore" v-close-popup>
+      <q-item-section no-wrap>Auto-Identify (CORE)</q-item-section>
+    </q-item>
+    <q-item clickable @click="autoIdentifyFull" v-close-popup>
+      <q-item-section no-wrap>Auto-Identify (FULL)</q-item-section>
     </q-item>
     <q-item clickable @click="promptResetSeries" v-close-popup>
       <q-item-section no-wrap>Reset Metadata</q-item-section>
@@ -28,6 +31,7 @@ import MediaServer from '@/types/mediaServer'
 import { useQuasar } from 'quasar'
 import { errorNotification } from '@/errorNotification'
 import { useSettingsStore } from '@/stores/settings'
+import type { LibraryApplyMode } from '@/types/metadata'
 
 const $q = useQuasar()
 const metadataService = inject<KomfMetadataService>(komfMetadataKey) as KomfMetadataService
@@ -101,18 +105,25 @@ async function resetSeries() {
     }
 }
 
-async function autoIdentify() {
+async function autoIdentify(applyMode: LibraryApplyMode) {
     loading.value = true
     try {
-        const jobId = await metadataService.matchSeries(libraryId(), seriesId())
+        const jobId = await metadataService.matchSeries(libraryId(), seriesId(), applyMode)
         if (jobId) {
             const waitResult = await metadataService.waitForJobCompletionOrBackground(jobId)
             if (!waitResult.completed) {
                 $q.notify({
-                    message: 'Processing continues in background. Refresh or check later for final updates.',
+                    message: `Processing continues in background (${applyMode}). Refresh or check later for final updates.`,
                     color: 'warning',
                     closeBtn: true,
                     timeout: 6000
+                })
+            } else {
+                $q.notify({
+                    message: `Series identify finished (${applyMode})`,
+                    color: 'secondary',
+                    closeBtn: true,
+                    timeout: 5000
                 })
             }
         }
@@ -121,6 +132,14 @@ async function autoIdentify() {
     } finally {
         loading.value = false
     }
+}
+
+async function autoIdentifyCore() {
+    await autoIdentify('CORE')
+}
+
+async function autoIdentifyFull() {
+    await autoIdentify('FULL')
 }
 </script>
 

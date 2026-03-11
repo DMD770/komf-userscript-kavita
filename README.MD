@@ -13,6 +13,10 @@ Adds KOMF integration to Komga/Kavita UI, with this fork focused on Kavita workf
 ### Fork notes
 
 - This fork tracks custom Kavita-focused behavior and config UX updates.
+- Library and series actions expose apply modes:
+  - `CORE`: series metadata, external links, summary, series cover, volume covers; no chapter writes
+  - `CHAPTERS`: chapter-level metadata only
+  - `FULL`: both scopes
 - Cover lock controls are split in settings:
   - `Lock Series Cover`
   - `Lock Volume Cover`

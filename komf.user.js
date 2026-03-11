@@ -11166,74 +11166,74 @@ body.body--dark {
 [data-v-791dfeef] .col {
     flex: 10000 1 0;
 }
-}.row[data-v-7ced52a2] {
+}.row[data-v-914d5c05] {
   margin: 0;
 }
-.col[data-v-7ced52a2], .col-auto[data-v-7ced52a2] {
+.col[data-v-914d5c05], .col-auto[data-v-914d5c05] {
   padding: 0;
 }
-.row + .row[data-v-7ced52a2] {
+.row + .row[data-v-914d5c05] {
   margin: 0;
 }
-[data-v-7ced52a2] .q-checkbox>* {
+[data-v-914d5c05] .q-checkbox>* {
   width: auto;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-7ced52a2] .q-tab__content>* {
+[data-v-914d5c05] .q-tab__content>* {
   flex-shrink: unset;
 }
-[data-v-7ced52a2] .q-tabs>* {
+[data-v-914d5c05] .q-tabs>* {
   width: auto;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-7ced52a2] .q-space {
+[data-v-914d5c05] .q-space {
   width: auto;
 }
-[data-v-7ced52a2] .q-splitter {
+[data-v-914d5c05] .q-splitter {
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-7ced52a2] .q-splitter>* {
+[data-v-914d5c05] .q-splitter>* {
   width: 1px;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-7ced52a2] .row {
+[data-v-914d5c05] .row {
   margin: 0;
   --bs-gutter-x: unset;
   --bs-gutter-y: unset;
 }
-[data-v-7ced52a2] .col {
+[data-v-914d5c05] .col {
   padding: 0;
 }
-[data-v-7ced52a2] .row + .row {
+[data-v-914d5c05] .row + .row {
   margin: 0;
 }
-.bg-dark[data-v-7ced52a2] {
+.bg-dark[data-v-914d5c05] {
   background: unset;
 }
-[data-v-7ced52a2] input:not([type=range]) {
+[data-v-914d5c05] input:not([type=range]) {
   background-color: unset;
   border-color: unset;
 }
-[data-v-7ced52a2] input:not([type=range]):focus {
+[data-v-914d5c05] input:not([type=range]):focus {
   border-color: unset;
   background-color: unset;
   box-shadow: unset;
 }
-[data-v-7ced52a2] .hidden {
+[data-v-914d5c05] .hidden {
   display: none !important;
 }
-[data-v-7ced52a2] .q-field__append {
+[data-v-914d5c05] .q-field__append {
   width: auto;
 }
-[data-v-7ced52a2] .q-chip {
+[data-v-914d5c05] .q-chip {
   width: auto;
 }
 @media (min-width: 0) {
-[data-v-7ced52a2] .col {
+[data-v-914d5c05] .col {
     flex: 10000 1 0;
 }
 }.row[data-v-e95f9e5e] {
@@ -11306,74 +11306,74 @@ body.body--dark {
 [data-v-e95f9e5e] .col {
     flex: 10000 1 0;
 }
-}.row[data-v-d9fce3cd] {
+}.row[data-v-87aeeba9] {
   margin: 0;
 }
-.col[data-v-d9fce3cd], .col-auto[data-v-d9fce3cd] {
+.col[data-v-87aeeba9], .col-auto[data-v-87aeeba9] {
   padding: 0;
 }
-.row + .row[data-v-d9fce3cd] {
+.row + .row[data-v-87aeeba9] {
   margin: 0;
 }
-[data-v-d9fce3cd] .q-checkbox>* {
+[data-v-87aeeba9] .q-checkbox>* {
   width: auto;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-d9fce3cd] .q-tab__content>* {
+[data-v-87aeeba9] .q-tab__content>* {
   flex-shrink: unset;
 }
-[data-v-d9fce3cd] .q-tabs>* {
+[data-v-87aeeba9] .q-tabs>* {
   width: auto;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-d9fce3cd] .q-space {
+[data-v-87aeeba9] .q-space {
   width: auto;
 }
-[data-v-d9fce3cd] .q-splitter {
+[data-v-87aeeba9] .q-splitter {
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-d9fce3cd] .q-splitter>* {
+[data-v-87aeeba9] .q-splitter>* {
   width: 1px;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-d9fce3cd] .row {
+[data-v-87aeeba9] .row {
   margin: 0;
   --bs-gutter-x: unset;
   --bs-gutter-y: unset;
 }
-[data-v-d9fce3cd] .col {
+[data-v-87aeeba9] .col {
   padding: 0;
 }
-[data-v-d9fce3cd] .row + .row {
+[data-v-87aeeba9] .row + .row {
   margin: 0;
 }
-.bg-dark[data-v-d9fce3cd] {
+.bg-dark[data-v-87aeeba9] {
   background: unset;
 }
-[data-v-d9fce3cd] input:not([type=range]) {
+[data-v-87aeeba9] input:not([type=range]) {
   background-color: unset;
   border-color: unset;
 }
-[data-v-d9fce3cd] input:not([type=range]):focus {
+[data-v-87aeeba9] input:not([type=range]):focus {
   border-color: unset;
   background-color: unset;
   box-shadow: unset;
 }
-[data-v-d9fce3cd] .hidden {
+[data-v-87aeeba9] .hidden {
   display: none !important;
 }
-[data-v-d9fce3cd] .q-field__append {
+[data-v-87aeeba9] .q-field__append {
   width: auto;
 }
-[data-v-d9fce3cd] .q-chip {
+[data-v-87aeeba9] .q-chip {
   width: auto;
 }
 @media (min-width: 0) {
-[data-v-d9fce3cd] .col {
+[data-v-87aeeba9] .col {
     flex: 10000 1 0;
 }
 }.row[data-v-d80e76e9] {
@@ -21468,10 +21468,10 @@ const _KomfMetadataService = class {
       throw new Error(msg);
     }
   }
-  async matchLibrary(libraryId) {
+  async matchLibrary(libraryId, applyMode = "CORE") {
     var _a2;
     try {
-      await this.postWithFallback(`/match/library/${libraryId}`);
+      await this.postWithFallback(`/match/library/${libraryId}`, void 0, { params: { applyMode } });
     } catch (e) {
       let msg = "Failed to match library";
       if (axios$1.isAxiosError(e)) {
@@ -21483,9 +21483,13 @@ const _KomfMetadataService = class {
       throw new Error(msg);
     }
   }
-  async matchSeries(libraryId, seriesId) {
+  async matchSeries(libraryId, seriesId, applyMode = "CORE") {
     try {
-      const response = await this.postLegacyFirstWithFallback(`/match/library/${libraryId}/series/${seriesId}`);
+      const response = await this.postLegacyFirstWithFallback(
+        `/match/library/${libraryId}/series/${seriesId}`,
+        void 0,
+        { params: { applyMode } }
+      );
       const data = response.data;
       if (!(data == null ? void 0 : data.jobId))
         return null;
@@ -39427,18 +39431,25 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
         errorNotification(e, $q);
       }
     }
-    async function autoIdentify() {
+    async function autoIdentify(applyMode) {
       loading.value = true;
       try {
-        const jobId = await metadataService.matchSeries(libraryId(), seriesId());
+        const jobId = await metadataService.matchSeries(libraryId(), seriesId(), applyMode);
         if (jobId) {
           const waitResult = await metadataService.waitForJobCompletionOrBackground(jobId);
           if (!waitResult.completed) {
             $q.notify({
-              message: "Processing continues in background. Refresh or check later for final updates.",
+              message: `Processing continues in background (${applyMode}). Refresh or check later for final updates.`,
               color: "warning",
               closeBtn: true,
               timeout: 6e3
+            });
+          } else {
+            $q.notify({
+              message: `Series identify finished (${applyMode})`,
+              color: "secondary",
+              closeBtn: true,
+              timeout: 5e3
             });
           }
         }
@@ -39447,6 +39458,12 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
       } finally {
         loading.value = false;
       }
+    }
+    async function autoIdentifyCore() {
+      await autoIdentify("CORE");
+    }
+    async function autoIdentifyFull() {
+      await autoIdentify("FULL");
     }
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock(Fragment, null, [
@@ -39470,12 +39487,28 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
             ]),
             withDirectives((openBlock(), createBlock(QItem, {
               clickable: "",
-              onClick: autoIdentify
+              onClick: autoIdentifyCore
             }, {
               default: withCtx(() => [
                 createVNode(QItemSection, { "no-wrap": "" }, {
                   default: withCtx(() => [
-                    createTextVNode("Auto-Identify")
+                    createTextVNode("Auto-Identify (CORE)")
+                  ]),
+                  _: 1
+                })
+              ]),
+              _: 1
+            })), [
+              [ClosePopup]
+            ]),
+            withDirectives((openBlock(), createBlock(QItem, {
+              clickable: "",
+              onClick: autoIdentifyFull
+            }, {
+              default: withCtx(() => [
+                createVNode(QItemSection, { "no-wrap": "" }, {
+                  default: withCtx(() => [
+                    createTextVNode("Auto-Identify (FULL)")
                   ]),
                   _: 1
                 })
@@ -39526,8 +39559,8 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const SeriesActionsMenu_vue_vue_type_style_index_0_scoped_7ced52a2_lang = "";
-const SeriesActionsMenu = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["__scopeId", "data-v-7ced52a2"]]);
+const SeriesActionsMenu_vue_vue_type_style_index_0_scoped_914d5c05_lang = "";
+const SeriesActionsMenu = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["__scopeId", "data-v-914d5c05"]]);
 const _sfc_main$7 = /* @__PURE__ */ defineComponent({
   __name: "KomgaSeriesActions",
   setup(__props) {
@@ -39575,19 +39608,28 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
       }
       throw new Error(`Unable to determine library id from URL: ${window.location.href}`);
     }
-    async function autoIdentify() {
+    async function launchLibraryMatch(applyMode) {
       try {
-        await metadataService.matchLibrary(libraryId());
+        await metadataService.matchLibrary(libraryId(), applyMode);
       } catch (e) {
         errorNotification(e, $q);
         return;
       }
       $q.notify({
-        message: "Launched library scan",
+        message: `Launched library scan (${applyMode})`,
         color: "secondary",
         closeBtn: true,
         timeout: 5e3
       });
+    }
+    async function autoIdentifyCore() {
+      await launchLibraryMatch("CORE");
+    }
+    async function autoIdentifyChapters() {
+      await launchLibraryMatch("CHAPTERS");
+    }
+    async function autoIdentifyFull() {
+      await launchLibraryMatch("FULL");
     }
     function escapeHtml(value2) {
       return value2.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
@@ -39665,6 +39707,7 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
       return `${minutes}m ${seconds}s`;
     }
     async function viewLatestSummary() {
+      var _a2, _b;
       try {
         const summary = await metadataService.latestLibrarySummary(libraryId());
         if (!summary) {
@@ -39680,6 +39723,7 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
         const duration = formatDurationMs(summary.startedAtEpochMs, summary.finishedAtEpochMs);
         const message = `
           <p><b>Started:</b> ${escapeHtml(started)} (${escapeHtml(duration)})</p>
+          <p><b>Apply mode:</b> ${escapeHtml((_a2 = summary.applyMode) != null ? _a2 : "unknown")} (${escapeHtml((_b = summary.applyModeSource) != null ? _b : "unknown")})</p>
           <p><b>Series:</b> total ${summary.totalSeries}, processed ${summary.processedSeries}, updated ${summary.updatedSeries}</p>
           <p><b>Skipped:</b> ${summary.skippedSeries}, <b>Unmatched:</b> ${summary.unmatchedSeries}</p>
           <p><b>Errors:</b> provider ${summary.providerErrors}, processing ${summary.processingErrors}, unexpected ${summary.unexpectedErrors}</p>
@@ -39695,9 +39739,10 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
       }
     }
     async function viewRunControlStatus() {
+      var _a2;
       try {
         const status = await metadataService.libraryRunControlStatus(libraryId());
-        const checkpoint = status.checkpoint ? `<p><b>Checkpoint:</b> page ${status.checkpoint.pageNumber}, index ${status.checkpoint.startIndexInPage}, dryRun=${status.checkpoint.dryRun}</p>` : "<p><b>Checkpoint:</b> none</p>";
+        const checkpoint = status.checkpoint ? `<p><b>Checkpoint:</b> page ${status.checkpoint.pageNumber}, index ${status.checkpoint.startIndexInPage}, dryRun=${status.checkpoint.dryRun}, applyMode=${(_a2 = status.checkpoint.applyMode) != null ? _a2 : "unknown"}</p>` : "<p><b>Checkpoint:</b> none</p>";
         $q.dialog({
           title: "Run Control Status",
           message: `
@@ -39813,7 +39858,7 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
         default: withCtx(() => [
           withDirectives((openBlock(), createBlock(QItem, {
             clickable: "",
-            onClick: autoIdentify
+            onClick: autoIdentifyCore
           }, {
             default: withCtx(() => [
               createVNode(QItemSection, {
@@ -39821,7 +39866,45 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
                 "no-wrap": ""
               }, {
                 default: withCtx(() => [
-                  createTextVNode("Auto-Identify Library")
+                  createTextVNode("Auto-Identify Library (CORE)")
+                ]),
+                _: 1
+              })
+            ]),
+            _: 1
+          })), [
+            [ClosePopup]
+          ]),
+          withDirectives((openBlock(), createBlock(QItem, {
+            clickable: "",
+            onClick: autoIdentifyChapters
+          }, {
+            default: withCtx(() => [
+              createVNode(QItemSection, {
+                class: "text-body2 text-weight-medium",
+                "no-wrap": ""
+              }, {
+                default: withCtx(() => [
+                  createTextVNode("Auto-Identify Library (CHAPTERS)")
+                ]),
+                _: 1
+              })
+            ]),
+            _: 1
+          })), [
+            [ClosePopup]
+          ]),
+          withDirectives((openBlock(), createBlock(QItem, {
+            clickable: "",
+            onClick: autoIdentifyFull
+          }, {
+            default: withCtx(() => [
+              createVNode(QItemSection, {
+                class: "text-body2 text-weight-medium",
+                "no-wrap": ""
+              }, {
+                default: withCtx(() => [
+                  createTextVNode("Auto-Identify Library (FULL)")
                 ]),
                 _: 1
               })
@@ -40007,8 +40090,8 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const LibraryActionsMenu_vue_vue_type_style_index_0_scoped_d9fce3cd_lang = "";
-const LibraryActionsMenu = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-d9fce3cd"]]);
+const LibraryActionsMenu_vue_vue_type_style_index_0_scoped_87aeeba9_lang = "";
+const LibraryActionsMenu = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["__scopeId", "data-v-87aeeba9"]]);
 const _sfc_main$5 = /* @__PURE__ */ defineComponent({
   __name: "KomgaLibraryActions",
   setup(__props) {

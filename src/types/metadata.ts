@@ -30,11 +30,15 @@ export interface RetrySkippedSeriesResponse {
     retryJobIds: string[],
 }
 
+export type LibraryApplyMode = 'CORE' | 'CHAPTERS' | 'FULL'
+
 export interface LibraryRunSummary {
     libraryId: string,
     startedAtEpochMs: number,
     finishedAtEpochMs: number,
     dryRun: boolean,
+    applyMode?: LibraryApplyMode,
+    applyModeSource?: string,
     totalSeries: number,
     processedSeries: number,
     updatedSeries: number,
@@ -50,6 +54,7 @@ export interface LibraryRunCheckpoint {
     pageNumber: number,
     startIndexInPage: number,
     dryRun: boolean,
+    applyMode?: LibraryApplyMode,
     updatedAtEpochMs: number,
 }
 

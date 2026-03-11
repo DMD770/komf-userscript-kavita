@@ -1,7 +1,13 @@
 <template>
   <q-menu class="text-body2 text-weight-medium">
-    <q-item clickable v-close-popup @click="autoIdentify">
-      <q-item-section class="text-body2 text-weight-medium" no-wrap>Auto-Identify Library</q-item-section>
+    <q-item clickable v-close-popup @click="autoIdentifyCore">
+      <q-item-section class="text-body2 text-weight-medium" no-wrap>Auto-Identify Library (CORE)</q-item-section>
+    </q-item>
+    <q-item clickable v-close-popup @click="autoIdentifyChapters">
+      <q-item-section class="text-body2 text-weight-medium" no-wrap>Auto-Identify Library (CHAPTERS)</q-item-section>
+    </q-item>
+    <q-item clickable v-close-popup @click="autoIdentifyFull">
+      <q-item-section class="text-body2 text-weight-medium" no-wrap>Auto-Identify Library (FULL)</q-item-section>
     </q-item>
     <q-item clickable v-close-popup @click="viewSkippedSeries">
       <q-item-section class="text-body2 text-weight-medium" no-wrap>View Skipped Series</q-item-section>
@@ -42,6 +48,7 @@ import { errorNotification } from '@/errorNotification'
 import { useQuasar } from 'quasar'
 import { useSettingsStore } from '@/stores/settings'
 import MediaServer from '@/types/mediaServer'
+import type { LibraryApplyMode } from '@/types/metadata'
 
 const $q = useQuasar()
 const metadataService = inject<KomfMetadataService>(komfMetadataKey) as KomfMetadataService
@@ -70,19 +77,31 @@ function libraryId() {
     throw new Error(`Unable to determine library id from URL: ${window.location.href}`)
 }
 
-async function autoIdentify() {
+async function launchLibraryMatch(applyMode: LibraryApplyMode) {
     try {
-        await metadataService.matchLibrary(libraryId())
+        await metadataService.matchLibrary(libraryId(), applyMode)
     } catch (e) {
         errorNotification(e, $q)
         return
     }
     $q.notify({
-        message: 'Launched library scan',
+        message: `Launched library scan (${applyMode})`,
         color: 'secondary',
         closeBtn: true,
         timeout: 5000
     })
+}
+
+async function autoIdentifyCore() {
+    await launchLibraryMatch('CORE')
+}
+
+async function autoIdentifyChapters() {
+    await launchLibraryMatch('CHAPTERS')
+}
+
+async function autoIdentifyFull() {
+    await launchLibraryMatch('FULL')
 }
 
 function escapeHtml(value: string): string {
@@ -189,6 +208,7 @@ async function viewLatestSummary() {
         const duration = formatDurationMs(summary.startedAtEpochMs, summary.finishedAtEpochMs)
         const message = `
           <p><b>Started:</b> ${escapeHtml(started)} (${escapeHtml(duration)})</p>
+          <p><b>Apply mode:</b> ${escapeHtml(summary.applyMode ?? 'unknown')} (${escapeHtml(summary.applyModeSource ?? 'unknown')})</p>
           <p><b>Series:</b> total ${summary.totalSeries}, processed ${summary.processedSeries}, updated ${summary.updatedSeries}</p>
           <p><b>Skipped:</b> ${summary.skippedSeries}, <b>Unmatched:</b> ${summary.unmatchedSeries}</p>
           <p><b>Errors:</b> provider ${summary.providerErrors}, processing ${summary.processingErrors}, unexpected ${summary.unexpectedErrors}</p>
@@ -208,7 +228,7 @@ async function viewRunControlStatus() {
     try {
         const status = await metadataService.libraryRunControlStatus(libraryId())
         const checkpoint = status.checkpoint
-            ? `<p><b>Checkpoint:</b> page ${status.checkpoint.pageNumber}, index ${status.checkpoint.startIndexInPage}, dryRun=${status.checkpoint.dryRun}</p>`
+            ? `<p><b>Checkpoint:</b> page ${status.checkpoint.pageNumber}, index ${status.checkpoint.startIndexInPage}, dryRun=${status.checkpoint.dryRun}, applyMode=${status.checkpoint.applyMode ?? 'unknown'}</p>`
             : '<p><b>Checkpoint:</b> none</p>'
         $q.dialog({
             title: 'Run Control Status',
