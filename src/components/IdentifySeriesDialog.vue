@@ -25,6 +25,15 @@
           <div class="col">
             <q-input class="q-pt-sm q-pb-sm" v-model="form.title" label="title" filled />
             <q-input class="q-pt-sm q-pb-sm" v-model="form.edition" label="edition" filled />
+            <q-select
+              class="q-pt-sm q-pb-sm"
+              v-model="form.applyMode"
+              :options="applyModeOptions"
+              label="apply mode"
+              filled
+              emit-value
+              map-options
+            />
           </div>
 
           <q-card-actions align="right" class="gt-xs q-pt-lg q-pb-sm">
@@ -67,7 +76,7 @@
 
 <script setup lang="ts">
 import { computed, inject, reactive, ref } from 'vue'
-import type { IdentifyRequest, SearchResult } from '@/types/metadata'
+import type { IdentifyRequest, LibraryApplyMode, SearchResult } from '@/types/metadata'
 import IdentifyCard from '@/components/IdentifyCard.vue'
 import type KomfMetadataService from '../services/komf-metadata.service'
 import { komfMetadataKey } from '@/injection-keys'
@@ -98,8 +107,16 @@ const search = ref(true)
 const results = ref(false)
 const loading = ref(false)
 const selected = ref(false)
-const form = reactive({ title: props.seriesTitle ?? '', edition: '' })
+const form = reactive<{ title: string, edition: string, applyMode: LibraryApplyMode }>({
+    title: props.seriesTitle ?? '',
+    edition: '',
+    applyMode: 'CORE'
+})
 const edition = ref('')
+const applyModeOptions: { label: string, value: LibraryApplyMode }[] = [
+    { label: 'CORE', value: 'CORE' },
+    { label: 'FULL', value: 'FULL' }
+]
 const searchResults = ref<SearchResult[]>()
 const selectedResult = ref<SearchResult>({} as SearchResult)
 
@@ -158,7 +175,8 @@ async function editMetadata() {
             seriesId: seriesId.value,
             provider: selectedResult.value.provider,
             providerSeriesId: selectedResult.value.resultId,
-            edition: edition.value == '' ? undefined : edition.value
+            edition: edition.value == '' ? undefined : edition.value,
+            applyMode: form.applyMode
         }
 
         try {
@@ -167,10 +185,17 @@ async function editMetadata() {
                 const waitResult = await metadataService.waitForJobCompletionOrBackground(jobId)
                 if (!waitResult.completed) {
                     $q.notify({
-                        message: 'Processing continues in background. You can close this dialog.',
+                        message: `Processing continues in background (${form.applyMode}). You can close this dialog.`,
                         color: 'warning',
                         closeBtn: true,
                         timeout: 6000
+                    })
+                } else {
+                    $q.notify({
+                        message: `Series identify finished (${form.applyMode})`,
+                        color: 'secondary',
+                        closeBtn: true,
+                        timeout: 5000
                     })
                 }
             }

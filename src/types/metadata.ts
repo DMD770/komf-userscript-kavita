@@ -10,7 +10,8 @@ export interface IdentifyRequest {
     seriesId: string,
     provider: string,
     providerSeriesId: string,
-    edition?: string
+    edition?: string,
+    applyMode?: LibraryApplyMode,
 }
 
 export interface SkippedSeriesEntry {
