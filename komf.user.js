@@ -11096,74 +11096,74 @@ body.body--dark {
 }
 .item-border[data-v-452f1499] {
   border: 3px solid #FEC000;
-}.row[data-v-791dfeef] {
+}.row[data-v-1bf2ac7c] {
   margin: 0;
 }
-.col[data-v-791dfeef], .col-auto[data-v-791dfeef] {
+.col[data-v-1bf2ac7c], .col-auto[data-v-1bf2ac7c] {
   padding: 0;
 }
-.row + .row[data-v-791dfeef] {
+.row + .row[data-v-1bf2ac7c] {
   margin: 0;
 }
-[data-v-791dfeef] .q-checkbox>* {
+[data-v-1bf2ac7c] .q-checkbox>* {
   width: auto;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-791dfeef] .q-tab__content>* {
+[data-v-1bf2ac7c] .q-tab__content>* {
   flex-shrink: unset;
 }
-[data-v-791dfeef] .q-tabs>* {
+[data-v-1bf2ac7c] .q-tabs>* {
   width: auto;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-791dfeef] .q-space {
+[data-v-1bf2ac7c] .q-space {
   width: auto;
 }
-[data-v-791dfeef] .q-splitter {
+[data-v-1bf2ac7c] .q-splitter {
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-791dfeef] .q-splitter>* {
+[data-v-1bf2ac7c] .q-splitter>* {
   width: 1px;
   padding-right: unset;
   padding-left: unset;
 }
-[data-v-791dfeef] .row {
+[data-v-1bf2ac7c] .row {
   margin: 0;
   --bs-gutter-x: unset;
   --bs-gutter-y: unset;
 }
-[data-v-791dfeef] .col {
+[data-v-1bf2ac7c] .col {
   padding: 0;
 }
-[data-v-791dfeef] .row + .row {
+[data-v-1bf2ac7c] .row + .row {
   margin: 0;
 }
-.bg-dark[data-v-791dfeef] {
+.bg-dark[data-v-1bf2ac7c] {
   background: unset;
 }
-[data-v-791dfeef] input:not([type=range]) {
+[data-v-1bf2ac7c] input:not([type=range]) {
   background-color: unset;
   border-color: unset;
 }
-[data-v-791dfeef] input:not([type=range]):focus {
+[data-v-1bf2ac7c] input:not([type=range]):focus {
   border-color: unset;
   background-color: unset;
   box-shadow: unset;
 }
-[data-v-791dfeef] .hidden {
+[data-v-1bf2ac7c] .hidden {
   display: none !important;
 }
-[data-v-791dfeef] .q-field__append {
+[data-v-1bf2ac7c] .q-field__append {
   width: auto;
 }
-[data-v-791dfeef] .q-chip {
+[data-v-1bf2ac7c] .q-chip {
   width: auto;
 }
 @media (min-width: 0) {
-[data-v-791dfeef] .col {
+[data-v-1bf2ac7c] .col {
     flex: 10000 1 0;
 }
 }.row[data-v-914d5c05] {
@@ -39075,8 +39075,16 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
     const results = ref(false);
     const loading = ref(false);
     const selected = ref(false);
-    const form = reactive({ title: (_a2 = props.seriesTitle) != null ? _a2 : "", edition: "" });
+    const form = reactive({
+      title: (_a2 = props.seriesTitle) != null ? _a2 : "",
+      edition: "",
+      applyMode: "CORE"
+    });
     const edition = ref("");
+    const applyModeOptions = [
+      { label: "CORE", value: "CORE" },
+      { label: "FULL", value: "FULL" }
+    ];
     const searchResults = ref();
     const selectedResult = ref({});
     const seriesId = computed(() => {
@@ -39132,7 +39140,8 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
           seriesId: seriesId.value,
           provider: selectedResult.value.provider,
           providerSeriesId: selectedResult.value.resultId,
-          edition: edition.value == "" ? void 0 : edition.value
+          edition: edition.value == "" ? void 0 : edition.value,
+          applyMode: form.applyMode
         };
         try {
           const jobId = await metadataService.identifySeries(request);
@@ -39140,10 +39149,17 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
             const waitResult = await metadataService.waitForJobCompletionOrBackground(jobId);
             if (!waitResult.completed) {
               $q.notify({
-                message: "Processing continues in background. You can close this dialog.",
+                message: `Processing continues in background (${form.applyMode}). You can close this dialog.`,
                 color: "warning",
                 closeBtn: true,
                 timeout: 6e3
+              });
+            } else {
+              $q.notify({
+                message: `Series identify finished (${form.applyMode})`,
+                color: "secondary",
+                closeBtn: true,
+                timeout: 5e3
               });
             }
           }
@@ -39240,6 +39256,16 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
                           "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => form.edition = $event),
                           label: "edition",
                           filled: ""
+                        }, null, 8, ["modelValue"]),
+                        createVNode(QSelect, {
+                          class: "q-pt-sm q-pb-sm",
+                          modelValue: form.applyMode,
+                          "onUpdate:modelValue": _cache[2] || (_cache[2] = ($event) => form.applyMode = $event),
+                          options: applyModeOptions,
+                          label: "apply mode",
+                          filled: "",
+                          "emit-value": "",
+                          "map-options": ""
                         }, null, 8, ["modelValue"])
                       ]),
                       createVNode(QCardActions, {
@@ -39365,8 +39391,8 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const IdentifySeriesDialog_vue_vue_type_style_index_0_scoped_791dfeef_lang = "";
-const IdentifySeriesDialog = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["__scopeId", "data-v-791dfeef"]]);
+const IdentifySeriesDialog_vue_vue_type_style_index_0_scoped_1bf2ac7c_lang = "";
+const IdentifySeriesDialog = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["__scopeId", "data-v-1bf2ac7c"]]);
 const _hoisted_1$1 = {
   class: "q-pa-md flex flex-center",
   style: { "background-color": "rgba(89, 89, 89, 0.5)" }
@@ -40676,3 +40702,4 @@ app.provide(httpKey, http);
 app.provide(komfMetadataKey, komfMetadata);
 app.provide(komfConfigKey, komfConfig);
 app.mount(mountElement);
+
